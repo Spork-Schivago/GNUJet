@@ -1,2 +1,3 @@
 # GNUJet
-A clone of the infamous JetBBS software from the early 90's.
+
+This software is no where's near complete and it may never be completed.   Please don't even try using it yet.  Thanks :)
