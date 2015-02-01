@@ -1,0 +1,3593 @@
+<html>
+<head>
+<style type="text/css">a{text-decoration:none}</style> <!-- We set text-decoration to none so our links are not underlined -->
+</head>
+<pre>
+                                JetBBS Version 5.0
+
+			     System Operator's Manual
+
+				 Documentation by
+		Troy Beckstrom, Jason Haskins, and Dan Sanderson.
+           Copyright (c) 1993-1996 Troy Beckstrom. All Rights Reserved.
+
+
+
+
+	      %%%%%%%		   %%%%%%%%%   %%%%%%%%%%      %%%%%  %
+		%%%	       %    %%%%  %%%	 %%%%  %%%    %%%  %%%%
+	       %%%	      %%    %%%	  %%%	 %%%   %%%   %%%    %%%
+	       %%%	     %%%    %%%	  %%%	 %%%   %%%   %%%     %
+	       %%%    %%%% %%%%%%   %%%	 %%%	 %%%  %%%    %%%%    %
+	      %%%    % %%%  %%%	   %%%	%%%	%%%  %%%      %%%%
+	      %%%   %% %%%  %%%	   %%%%%%	%%%%%%	       %%%%
+	      %%%  %%  %%   %%%	   %%%	%%%	%%%  %%%	%%%%
+	      %%%  %% %%%  %%%	   %%%	 %%%	%%%   %%%	 %%%%
+	     %%%  %%%%%	   %%%	  %%%	 %%%   %%%    %%%  %	  %%%
+	 %%  %%%  %%%	   %%% ___%%%	 %%%   %%%    %%%  %	  %%%
+	%%%  %%	  %%%	%  %% /\  \%%	%%%%   %%%   %%%%  %%	  %%%
+	%%  %%%	  %%%  %  %%%/	\  \   %%%%   %%%   %%%%  %%%%	 %%%
+	 %%%%	   %%%%	   %/	 \  \%%%%    %%%%%%%%%	  %   %%%%%
+			   /\	 /  /
+			  /  \	/  /
+			 /    \/  /
+			 \    /\  \
+			  \  /	\  \
+			   \/	 \  \
+			    \	 /  /
+			     \	/  /
+		      ___     \/__/	___
+		     /\	 \	       /\  \
+		    /  \  \	      /	 \  \
+		   /	\  \	     /	  \  \	    ___
+		   \	/  /	    /\	  /  /	   /\  \
+		    \  /  /	   /  \	 /  /	  /  \	\
+		     \/__/	  /    \/  /	 /    \	 \
+				  \    /  /	 \    /	 /
+				   \  /	 /	  \  /	/
+                                    \/__/          \/__/
+
+
+
+
+			      Table of Contents
+
+	<A HREF="#chap_1">Chapter 1 - Introduction.....................................4</A>
+	   <A HREF="#chap_1_sys_reqs">System Requirements ......................................4</A>
+	   <A HREF="#chap_1_contact">How To Contact Me ........................................4</A>
+	<A HREF="#chap_2">Chapter 2 - Installation.....................................6</A>
+	<A HREF="#chap_3">Chapter 3 - Customizing Text Files...........................7</A>
+	<A HREF="#chap_4">Chapter 4 - Configuration....................................8</A>
+	   <A HREF="#chap_4_bbs.ini">BBS.INI Configuration File ...............................8</A>
+	   <A HREF="#chap_4_intro_mnu">Introduction to MNU Files ................................9</A>
+	<A HREF="#chap_5">Chapter 5 - Advanced Features...............................11</A>
+	   <A HREF="#chap_5_doors">Door Programs ...........................................11</A>
+	   <A HREF="#chap_5_events">Daily Events ............................................12</A>
+	   <A HREF="#chap_5_multi-line">Multi-Line ..............................................12</A>
+	   <A HREF="#chap_5_windows">Windows .................................................14</A>
+	   <A HREF="#chap_5_pay">Running A Pay System ....................................15</A>
+	   <A HREF="#chap_5_cdrom">CD-ROM Support ..........................................16</A>
+	<A HREF="#chap_6">Chapter 6 - Utilities.......................................17</A>
+	   <A HREF="#chap_6_import">IMPORT Utility ..........................................17</A>
+	   <A HREF="#chap_6_msgfix">MSGFIX Utility ..........................................17</A>
+	<A HREF="#chap_7">Chapter 7 - Fixing Modem Problems...........................19</A>
+	   <A HREF="#chap_7_problems">Common Problems and Suggested Solutions .................20</A>
+	   <A HREF="#chap_7_modem_init">Modem Init Parameters ...................................23</A>
+	<A HREF="#chap_8">Chapter 8 - Using the BBS...................................24</A>
+	   <A HREF="#chap_8_message_base">Using the Message Base ..................................24</A>
+	   <A HREF="#chap_8_sub-boards">Sub-Boards ..............................................26</A>
+	   <A HREF="#chap_8_email">E-Mail ..................................................26</A>
+	   <A HREF="#chap_8_auto-message">Auto-Message, Board-News, and Logon Messages ............27</A>
+	   <A HREF="#chap_8_borderlines">Borderlines .............................................27</A>
+	   <A HREF="#chap_8_file_transfers">File Transfers ..........................................27</A>
+	   <A HREF="#chap_8_BBS_phone_list">BBS Phone List ..........................................27</A>
+	   <A HREF="#chap_8_userlog_menu">Userlog Menu ............................................28</A>
+	   <A HREF="#chap_8_message_base_and_userlog_scrolling">Message Base and Userlog Scrolling ......................28</A>
+	   <A HREF="#chap_8_access_level">Access Level ............................................29</A>
+	   <A HREF="#chap_8_sysop_func_keys">Sysop Function Keys .....................................29</A>
+	<A HREF="#chap_9">Chapter 9 - MNU Tutorial....................................31</A>
+	   <A HREF="#chap_9_menu_block">MNU File [menu] Block ...................................31</A>
+	   <A HREF="#chap_9_do_block">MNU File [do] Block .....................................34</A>
+	<A HREF="#chap_10">Chapter 10 - MNU %variable% Replacement Keywords............35</A>
+	<A HREF="#chap_11">Chapter 11 - MNU Command Reference..........................39</A>
+	   <A HREF="#chap_11_auto-message">Auto-Message ............................................39</A>
+	   <A HREF="#chap_11_bank">Bank ....................................................39</A>
+	   <A HREF="#chap_11_borderlines">Borderlines .............................................41</A>
+	   <A HREF="#chap_11_doors">Doors ...................................................41</A>
+	   <A HREF="#chap_11_goto">Goto ....................................................43</A>
+	   <A HREF="#chap_11_logoff">Logoff ..................................................44</A>
+	   <A HREF="#chap_11_mail">Mail ....................................................44</A>
+	   <A HREF="#chap_11_message_base">Message Base ............................................45</A>
+	   <A HREF="#chap_11_miscellaneous">Miscellaneous ...........................................46</A>
+	   <A HREF="#chap_11_multi-line">Multi-Line ..............................................48</A>
+	   <A HREF="#chap_11_phone_list">Phone List ..............................................49</A>
+	   <A HREF="#chap_11_print">Print ...................................................49</A>
+	   <A HREF="#chap_11_sub-boards">Sub-Boards ..............................................50</A>
+	   <A HREF="#chap_11_sysop">Sysop ...................................................51</A>
+	   <A HREF="#chap_11_transfers">Transfers ...............................................53</A>
+	   <A HREF="#chap_11_userlog">Userlog .................................................54</A>
+           <A HREF="#chap_11_voting_poll">Voting Poll .............................................55</A>
+
+
+
+
+        <A HREF="#chap_12">Chapter 12 - Software License ..............................56</A>
+        <A HREF="#page57">Registration Form ..........................................57</A>
+        <A HREF="#index">Index ......................................................58</A>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    - 3 -
+<A NAME="chap_1">
+
+
+
+			     Chapter 1 - Introduction
+
+	JetBBS is a fully featured, yet easy to use shareware bulletin
+	board system.  Its strong points include:
+
+	    - Highly configurable.  Like a BBS construction kit that is
+		already put together for you.  You can change almost
+		anything to the way you want it.
+
+	    - Quick to install and easy to run.  JetBBS is designed to be
+		able to run on its own without requiring sysop attention.
+
+	    - Multi-line capability, including multi-user chat.  Even if
+		you only have one line, you can use this feature to log
+		on locally while the BBS continues to take calls.
+
+	    - A conversion utility that can import the message base from
+		almost any other BBS software.
+
+	    - Sub-Boards, so users can run their own mini-BBSes.
+
+	    - File transfers, with tagged batch downloads.
+
+	    - Support for four door protocols: DORINFO1.DEF,
+		CALLINFO.BBS, CHAIN.TXT, and DOOR.SYS.
+
+	    - Optional credit system with 8 built in casino games.
+
+	    - Voting polls.
+
+	    - QWK mail and message packets for offline reading, and
+		upload of REP packets for responding.
+
+            - Easy to use full screen message editor.
+
+<A NAME="chap_1_sys_reqs">	SYSTEM REQUIREMENTS
+
+	    An IBM compatible computer
+	    A hard drive
+	    At least 640k of RAM
+	    A modem
+
+	You'll need to be running MS-DOS, or an operating system that can
+	emulate DOS, such as OS/2.  To run multiple lines, or to log on
+	locally while the BBS is running, you need a multitasking
+	operating system.  JetBBS has been tested thoroughly on Windows,
+	and a JETBBS.PIF file is included for that purpose.  It has also
+	been running BBSes on DESQview and OS/2 Warp.
+
+<A NAME="chap_1_contact">	HOW TO CONTACT ME
+
+	I will be happy to answer your questions and help fix any problems
+	you are having.  Please include your BBS's name and phone number
+	if you have one, and your mailing address or internet e-mail
+	address so I can respond if you are long distance.  For the
+
+
+                                      - 4 -
+
+
+
+
+	quickest response, call the support BBS and post a message in the
+	JetBBS Support room, where other sysops may be able to help.
+
+	I can be reached by e-mail at:
+
+	     beckstrom@jetbbs.com
+
+	     account #2 at Dimension Nine Support BBS,
+		206-LAB-TEAM (206-522-8326) or 206-522-3980
+
+	Or by paper mail:
+
+	     Troy Beckstrom
+	     2318 Second Avenue #492
+	     Seattle, WA 98121
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 5 -
+<A NAME="chap_2">
+
+
+
+			     Chapter 2 - Installation
+
+	To install JetBBS, you need to have the files JETSETUP.EXE and
+	JETBBS.DAT.  Type "JETSETUP" to begin the installation program.
+
+	After you have completed the setup process, you need to create an
+	account for yourself on the BBS.  You should be the first person
+	to log on after running the setup program because the first
+	account will already be set at a Sysop level and feedback will be
+	directed there.  To create an account for yourself, run "JETBBS
+	LOCAL" and log in as "NEW".  After entering all the information,
+	you will be placed at the main menu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 6 -
+<A NAME="chap_3">
+
+
+
+			Chapter 3 - Customizing Text Files
+
+	This section will explain what help files are and guide you
+	through the process of customizing them to modify the appearance
+	of your BBS.  Help files usually contain a list of options that a
+	user may select from at a menu.  Besides editing the help files,
+	you can also edit and personalize the text files that will be
+	displayed upon logon and logoff as well as the new user
+	information file that will be displayed to new users when they
+	type "NEW" upon connecting with your board.  You may either use
+	the editor included with the BBS program, or any other text editor
+	you prefer.  The text and help files are contained in the TEXT
+	directory.  The following are the text and help files that you may
+	edit.  NEWUSER.TXT, LOGON.TXT, and LOGOFF.TXT should be edited,
+	but all others are optional.
+
+	\BBS\TEXT\NEWUSER.TXT (Text file displayed to new users)
+	\BBS\TEXT\LOGON.TXT   (Logon message displayed upon connect)
+	\BBS\TEXT\LOGOFF.TXT  (Logoff message displayed when logging off)
+	\BBS\TEXT\MAIN.HLP    (Main Menu help file)
+	\BBS\TEXT\MSG.HLP     (Message Base help file)
+	\BBS\TEXT\SUB.HLP     (Sub-Board help file)
+	\BBS\TEXT\BANK.HLP    (Bank/Casino help file)
+	\BBS\TEXT\POLL.HLP    (Voting Poll Help file)
+	\BBS\TEXT\USERLOG.HLP (Userlog help file)
+
+	If you choose to use the editor included with the BBS, press [*]
+	to go to the Sysop menu, and then [+] to receive a menu of edit
+	options.  Press [T] to edit the help files.  All files that are
+	displayed to users will be included in the listing of available
+	choices.  You might want to go into each one and change "JetBBS"
+	to your BBS's name to make things more personalized.  You may
+	alter the physical appearance of any of the ".HLP" or ".TXT" files
+	in any way you wish.  It will have no repercussions on what
+	commands you may access from that menu.
+
+	You should be especially sure to edit NEWUSER.TXT which is
+	displayed to a new user after they log on and type "NEW" as well
+	as the LOGON.TXT and LOGOFF.TXT which are displayed to the users
+	upon logging on and off your board.  The NEWUSER.TXT should
+	contain information about what you expect out of the users, and
+	what your policies and requirements are on the BBS.  While in the
+	editor, you may use escape at any time to return to a listing of
+	files you may edit, or to the BBS.
+
+	You can also use the BBS's built in message editor to edit text
+	files.  Its advantage is that it can also be used from remote (if
+	RemoteSysopPassword has been set, more on this later), but since
+	it can't use direct screen writes, it's not as easy to use as the
+	non-modemable editors.  To use it, press [E] in the sysop menu and
+	give it a filename, such as "TEXT\NEWUSER.TXT".
+
+
+
+
+
+                                      - 7 -
+<A NAME="chap_4">
+
+
+
+			    Chapter 4 - Configuration
+
+<A NAME="chap_4_bbs.ini">	BBS.INI CONFIGURATION FILE
+
+	The BBS.INI file contains many useful and easy to change
+	configuration options.  This is one of the first files you should
+	view and change to suit your needs after entering the BBS for the
+	first time.  There are complete descriptions under each command in
+	the BBS.INI file which list the possible configurations for each
+	setting, so modifying this file is extremely easy.  To aid you in
+	editing this file and determining which configurations you may
+	want to modify, we will include several examples and elaborate on
+	some of the available settings.  To view or edit the BBS.INI file,
+	enter the sysop menu, press [+] and then select [I] from the list
+	of options.
+
+	The BBS.INI file is broken up into two parts.  All lines with a
+	semicolon (";") in front of them are comments inserted in the file
+	to aid you in the configuration of the file.  Everything else in
+	the file is an actual command.  If you wish to prevent a line in
+	the file from being read, you may place a semicolon before it, and
+	the line will ignored.  This may useful if you wish to disable a
+	command or interject a note somewhere in the file.
+
+	There are several lines in the BBS.INI file which you may wish to
+	change.  Regardless of whether you are interested in changing any
+	of the things that we mention, you should at least browse through
+	the BBS.INI file to see all the options that are available.
+
+	JetBBS can filter out the escape character, which is the first of
+	several characters in a series which produce cursor movements and
+	colors on the screen.  These are generally called ANSI characters.
+	The current setting in the INI file is to allow escape characters.
+	If you would like to disallow them, change "AllowEscChar: 1" to
+	"AllowEscChar: 0".
+
+	Also included in JetBBS is the ability to limit the number of
+	calls per day allowed at each access level and the amount of time
+	allowed on-line at each access level per day.  These are
+	particularly useful if you are running a popular file board or pay
+	board and need to place restrictions on the amount of time or
+	number of calls a user has on-line each day.  However, if you are
+	running a message oriented board, you may not be as concerned
+	about how long a user is on-line, or how many calls they make to
+	your board each day.  In this case you may wish to raise the
+	amount of time they have on-line as well as the number of calls
+	allowed per day to a non-restrictive amount or even abolish all
+	limitations.  The calls allowed per day at each access level as
+	well as the time limit allowed at each access level per day may be
+	modified in the BBS.INI file.  If you would like to disable them,
+	you may place a semicolon before each line which will turn them
+	off.  You may also disable time limits or calls per day for
+	specific access levels and leave them intact for others.
+
+
+
+                                      - 8 -
+
+
+
+
+	The Sysop menu can be accessed by any level 8 or 9 user, however
+	JetBBS places a restriction on certain commands.  There are some
+	commands in the sysop menu marked by an "(*)" that can access the
+	file system directly, inside and outside of the BBS's directory.
+	They are: Shell to DOS, Enter DOS Command, View Text File, Edit
+	Text File, Edit Doors, and Edit Transfer Areas.  There are others
+	that could be quickly and widely destructive to the BBS's data
+	files.  To defend against remote access to these commands, there
+	is a "RemoteSysopPassword:" field in the BBS.INI file.  If the
+	password is left blank, as it is when the BBS is first set up, the
+	commands cannot be accessed from remote at all.  Once you set a
+	password, they can be used from remote by using the password.  In
+	addition to protecting data, the password is also required in the
+	Edit User and Delete User commands if the user being changed is
+	level 8 or 9, or if a level 8 or 9 account is to be created.
+
+	The remote sysop password serves as an added barrier of security
+	beyond the level 9 access level required to access sysop commands.
+	For most sysops, there is no need to make the whole computer
+	potentially accessible through the modem.  You may want to have
+	level 9 co-sysops who have full sysop control over the BBS, but
+	not over the rest of your computer.
+
+	The remote sysop password is not required for sysops logged in
+	locally because the user at the local console could press [ALT+X],
+	[CTRL+C], or [CTRL+BREAK] and instantly get a DOS prompt to do
+	whatever they want.  Commands listed as access level -2 in the MNU
+	files can only be used by the local sysop regardless of the remote
+	sysop password.  Level -2 is mainly used for calling external
+	programs that could not be used over the modem anyway.
+
+<A NAME="chap_4_intro_mnu">	INTRODUCTION TO MNU FILES
+
+	This section will explain how to alter MNU files which are located
+	in the MNU  directory.  We will give an overview of MNU files so
+	that you can get a feel of just how configurable JetBBS really is.
+	If you would like an in depth look at the MNU files, you may refer
+	to the reference section of this manual.
+
+	The MNU files are divided into two sections; the "[do]" block and
+	the "[menu]" block.  The "[do]" block contains commands that are
+	executed when someone enters the menu.  The commands in the
+	"[menu]" block execute when you press the proper key or enter a
+	"/" command.  The syntax for commands placed in the "[menu]" block
+	of a MNU file is:
+
+	&lt;key or "/" entry&gt;,&lt;command and arguments&gt;,&lt;level&gt;,&ltprint when key
+	pressed&gt;;
+
+	One feature you may be interested in changing is the volume of the
+	chat bell.  If the default chat bell is not loud enough, there is
+	an alternate chat routine that you may use.  To implement it, you
+	will need to load MAIN.MNU into a text editor.  You should either
+	use [+] in the sysop menu or DOS's "EDIT".
+
+
+                                      - 9 -
+
+
+
+
+	The line is normally:
+
+	c,	chat,				    1,	Chat;
+
+	Change it to:
+
+	c,	chatloud,			    1,	Chat;
+
+	Another menu you may wish to modify is FIRST.MNU.  After entering
+	their usernumber and password correctly, this is the menu that
+	users will automatically be sent to.  Any of the "print"
+	statements may be altered in any way you wish.  You may change the
+	order in which these commands are carried out and even change the
+	menu that they are placed in to begin with.
+
+	After a user goes through the process of logging on, they are
+	normally placed in the main menu.  This can be altered so that
+	users are placed into a different menu, such as the message base
+	menu.  This may be ideal if you are running a message base board.
+	To make this change, edit FIRST.MNU and change the line "GOTO
+	MAIN.MNU" to "GOTO MSG.MNU."
+
+	In FIRST.MNU and several of the other MNU files, you will notice
+	%variable% keyword replacements.  When you place these "%"
+	variables in your MNU files, they instruct JetBBS to retrieve
+	information such as what access level a user has, what comport
+	they are calling on, what baud they are connected at, as well as
+	specific information about the user on-line.  There is a complete
+	listing of all %variable% replacements in the reference section of
+	this manual.
+
+	STATS.MNU is displayed to users when they press [Y] in the userlog
+	to view general information about themselves.  You may alter what
+	will be displayed to them by editing the file and deciding what
+	%variable%s you would like them to see when they access this
+	command.
+
+	For more on MNU files, please refer to Chapter 9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 10 -
+<A NAME="chap_5">
+
+
+
+			  Chapter 5 - Advanced Features
+
+<A NAME="chap_5_doors">	DOOR PROGRAMS
+
+	JetBBS provides four door drop file (a.k.a. chain file) formats
+	which allows it to use a wide variety of door games you may choose
+	to put on-line.  It includes support for DORINFO1.DEF,
+	CALLINFO.BBS, CHAIN.TXT, and DOOR.SYS.  Please refer to the chart
+	below, which lists which drop file formats are compatible with
+	which BBS programs.  Door games often request the name of a BBS
+	program instead of the name of the drop file.
+
+	    Drop file	   Other BBSes that use it
+	    ----------	   -----------------------
+	    DORINFO1.DEF   RBBS, QBBS, FoReM, TPB, T.A.G.
+	    CALLINFO.BBS   Wildcat!
+	    CHAIN.TXT	   WWIV, Telegard
+	    DOOR.SYS	   Generic drop file used by many BBSes
+
+	PLEASE NOTE: The drop files are not static files that you keep a
+	copy of.  They are created in the BBS directory with current
+	information about the user at the time the door program is run,
+	and deleted when the door is finished.  You will not normally see
+	these files.
+
+	This section will explain how to set up a door program to run with
+	JetBBS.  Included in the sysop menu, by pressing [6], is a utility
+	which allows you to enter all the pertinent information such as
+	the command line to execute, the key the user presses, and what to
+	put in the help file.  After you give JetBBS the information, it
+	will automatically place it into the DOOR.MNU file as well as the
+	help file for you.
+
+	Before setting up a door game to run with JetBBS, you must first
+	unpack the door you wish to run.  It is best to unpack it into a
+	subdirectory within the BBS directory.  For example, you would
+	type "MKDIR \BBS\&lt;dir&gt;", where &lt;dir&gt; is the name of the directory
+	you wish to create.  After unpacking the game, you need to read
+	the documentation included with the game for instructions on how
+	to set up the game.
+
+	Each door game will vary in the way it has to be set up.  Some
+	require you to run an installation program, and others will not.
+	You will need to follow the instructions to create a batch file or
+	edit an existing one that was included in the door game's archive.
+	Some games automatically produce a batch file in any directory you
+	specify.  If this is the case, tell the program to produce a batch
+	file in the \BBS directory.  They may also ask which directory
+	your BBS produces door files in.  Instruct them to look in \BBS.
+	The batch file will need to "cd" to the proper directory, execute
+	the door along with any additional parameters, and "cd" back
+	afterward.  Make sure you create the batch file in the \BBS
+	directory.  See the registration form if you would like to buy a
+	disk full of door games, as well as batch files already set up to
+	run them from JetBBS.
+
+                                      - 11 -
+
+
+
+
+
+	You will need the following information to give to the door
+	installer which may be accessed by pressing [6] in the sysop menu.
+
+	    - The key you would like users to press to access the game
+	    - What you want the BBS to print when they press the key
+	    - Description of the game, or the line you would like to
+		appear in the help file
+	    - The DOS command to execute the game (This should be the
+		name of the batch file)
+	    - The access level required to play the game
+
+	For additional information on setting up door programs, refer to
+	the "door" section in Chapter 10.
+
+<A NAME="chap_5_events">	DAILY EVENTS
+
+	Some door games require an event or maintenance program to be run
+	each day to update statistics and reset the player files in the
+	game.  If any games you have on-line require an event file to be
+	run at midnight each day, then you need to create a batch file to
+	run them.  The first thing to do is make a batch file to run the
+	door game event file.  To do this, have the batch file "cd" to the
+	directory, run the event file, and "cd" back.  You do not have to
+	worry about drop formats, as it will be run in local mode when
+	nobody is on-line.
+
+	After you have created a batch file for each of the door game
+	event files, make another batch file called EVENT.BAT.  Tell this
+	file to run all the other event batch files using the syntax "call
+	DAILY.BAT" where "DAILY.BAT" is the name of the event batch file.
+	As you add more door games that require event files, you may
+	create batch files for them and add them to the list in EVENT.BAT.
+	You now need to edit your BBS.INI file and change the line
+	"MidnightEvent:" to "MidnightEvent: EVENT.BAT".  EVENT.BAT will be
+	run each day at midnight.  The following example is a standard
+	maintenance batch file as well as a model of what EVENT.BAT should
+	look like.
+
+	Event batch file (EVENT.BAT):
+
+	     CALL DAILY1.BAT
+	     CALL DAILY2.BAT
+	     CALL DAILY3.BAT
+
+	Door game daily maintenance batch file (DAILY1.BAT):
+
+	     CD GAMEDIR
+	     DORMAINT.EXE
+	     CD ..
+
+<A NAME="chap_5_multi-line">	MULTI-LINE
+
+	One of the impressive features that JetBBS boasts is the ability
+	to run a multi-line board.  By using a multitasking operating
+
+                                      - 12 -
+
+
+
+
+	system, you may run multiple JetBBS sessions at any given time.
+	JetBBS has been tested extensively under Microsoft Windows 3.1,
+	and Windows 95.
+
+	Running under Windows, DESQview, or OS/2, JetBBS will detect the
+	multitasker and yield unused CPU time back to it.  By doing this,
+	the BBS only slows the rest of the system down when it's working
+	hard, which is infrequent.  When it's waiting for a call, posting
+	a message, or pausing for a key to be pressed, it's taking almost
+	no CPU time.  With this feature, the BBS multitasks on Windows
+	almost as well as the multitasking of a native-mode application on
+	a fully multitasked operating system such as OS/2 or Windows NT.
+
+	Even if you do not plan to run a multi-line board, it is
+	convenient to be able to log on locally while another user is on-
+	line.  This way you will not have to take the BBS down every time
+	you want to log on from console.  Simply start a separate session
+	and run "JETBBS LOCAL".
+
+	If you plan on running a multi-line system, you need to first edit
+	your AUTOEXEC.BAT file which is in your root directory and add the
+	line "SHARE" to the end if it isn't there already.  It will take
+	effect the next time you reboot.
+
+	To take full advantage of the multi-line features, you need to
+	have a ramdrive.  To create a ramdrive, place the line:
+	"DEVICE=C:\DOS\RAMDRIVE.SYS 32 /E" in your CONFIG.SYS file which
+	is also located in your root directory.  If this is not the path
+	of your DOS directory, then substitute it in for "C:\DOS".  This
+	will instruct DOS to create a 32k ramdrive using extended memory
+	the next time you re-boot.  If you do not have more than 640k or
+	memory, then do not use the "/E" switch.  The ramdrive will appear
+	as the next unused drive letter, which is usually D: on most
+	systems with one unpartitioned hard drive.
+
+	After creating a ramdrive, edit BBS.INI and locate the line
+	"RamDriveDir:".  Change it to "RamDriveDir: D:\" or whatever
+	letter it turns out to be on your system.
+
+	After specifying RamDriveDir, you will be able to use multi-line
+	commands on JetBBS.  JetBBS will create a "lock" file on the
+	ramdrive that will prevent a user from logging in on more than one
+	line at a time.  Messages sent between users while they are on-
+	line will be routed through the ramdrive.  The multi-line commands
+	are:
+
+	    /broadcast or /bc  Sends a message to all users currently on-
+				 line.
+	    /touch &lt;user&gt;      Sends a message to a specific user on-
+				 line.
+	    /who	       Displays all users that are currently on-
+				 line, what comport they are connected
+				 on,  what speed they are calling at, and
+				 what menu they are in.
+
+
+                                      - 13 -
+
+
+
+
+	    /talk [channel]    Goes into the multi-user chat area.  If
+				 [channel] isn't specified, the default
+				 is channel 0.  To have a private
+				 conference with someone, pick a random
+				 number from 1-9999 and use the /touch
+				 command to tell the user you want to
+				 talk with to enter that channel.
+
+	When you create a ramdrive and set the BBS up to run as a multi-
+	line system, a "lock" file will be created on your ramdrive every
+	time a user logs on.  It will then be deleted when they log off.
+	The file will be saved in the format "LOCK#.TXT", where the "#" is
+	the caller's user number.  Sometimes if the BBS crashes, a
+	LOCK#.TXT file gets left over and the system will say the user's
+	account is still online when they're not.  Simply delete the
+	LOCK#.TXT file to unlock it.  The lock file is also used by the
+	"/who" command to see what accounts are logged in.
+
+	Many new modems these days allow you to set the IRQ number,
+	(Interrupt ReQuest, the control line the modem uses to get the
+	computer's attention when it has incoming data) which can be handy
+	for setting up a 3 or 4 line BBS.  It's best if each line has its
+	own IRQ, but the way the IBM PC is designed, COM1 and COM3
+	traditionally share IRQ 4, and COM2 and COM4 share IRQ 3.  You
+	don't have to use these combinations if you have a modem that
+	allows you to set the IRQ separately.  IRQ 5 and IRQ 7 are often
+	used for modems.  IRQ 5 is for the 2nd printer port, which can be
+	used if you don't have a second printer, and IRQ 7 is for the 1st
+	printer port, which is ok to re-use for a modem while you're not
+	printing something out.  Don't worry, experimenting with the IRQs
+	can't break anything.  Use the command line switch "/i:#" to set
+	the IRQ that JetBBS uses.  For example, to run on COM3 with IRQ 5,
+	you would use the command line "JETBBS COM3 /i:5".
+
+	There are a couple of common CPU hogs that you should watch out
+	for.  One is screen savers, especially ones that draw things on
+	the screen.  Screen savers are designed with the assumption that
+	if there isn't someone sitting in front of the computer, the
+	computer isn't busy so it's OK to waste all the CPU time.  This
+	isn't true with a BBS because users can be using it remotely and
+	have to compete for CPU time with a greedy screen saver.  Another
+	CPU hog is windowed DOS sessions in graphics mode.  If you run the
+	BBS in a window on the same screen as the graphical user
+	interface, the operating system has to spend a lot of time to
+	scroll the windowed screen, and these pauses will be noticable by
+	users.
+
+<A NAME="chap_5_windows">	MICROSOFT WINDOWS
+
+	If you are multitasking under Windows, you will need to create a
+	PIF file for each additional session of JetBBS you wish to run.
+	To create another PIF file, enter the PIF editor and open the file
+	JETBBS.PIF which is in the \BBS directory.  If you would like to
+	create a PIF for an additional modem, click on "Optional
+	Parameters" and enter "COM# baud", for example "COM2 14400".  Save
+
+                                      - 14 -
+
+
+
+
+	the file as some other filename, such as JETBBS2.PIF, and  create
+	a new icon in Windows to run it.  Two pre-made PIF files are
+	provided: JETBBS.PIF, which uses the default COM port and baud
+	speed, and JETLOCAL.PIF for you to log on locally.
+
+	You can set the foreground and background priority of the BBS
+	fairly high because the BBS has a special feature to detect
+	Windows and yield back unused CPU time.  Since it gives back what
+	it doesn't need, increasing the BBS's priority doesn't increase
+	the amount of the computer's time that the BBS takes, just the
+	upper limit on it.
+
+	See the file WINDOWS.DOC for more important information on running
+	JetBBS under Windows.
+
+<A NAME="chap_5_pay">	RUNNING A PAY SYSTEM
+
+	JetBBS is designed to be configurable as a pay system by allowing
+	the sysop to sell usage time or credits for real money.  You don't
+	have to give out both, however, because you can set up commands in
+	the bank to exchange one for the other at some exchange rate.  The
+	exchange rate does not have to be the same both ways.  View or
+	edit BANK.MNU, which is located in \BBS\MNU, for more details.
+	(press [*], then [+], then [M], then move the highlight bar down
+	to BANK.MNU and press enter)
+
+	To use time as the commodity on a pay board, first set the
+	MinutesPerDay lines in BBS.INI to the daily freebie handout that
+	will be given to non-paying users and to users who have run out of
+	paid time.  This should be relatively low; just enough to allow
+	them to get oriented with your board and see all the features
+	available.  For paying users, use the [A] Add Time command in the
+	sysop menu to give out usage time.  As long as their Time Left
+	stays above the MinutesPerDay setting, it will not be reset by
+	MinutesPerDay.  The MinutesPerDay setting only pulls people up
+	when they are below it; those above it are left alone.
+
+	To give free trial time to new users, set "NewUserBonusTime:" in
+	BBS.INI.  Or, a more reliable method is to use the callback
+	verifier that comes with the registered version to give free trial
+	time to users when their phone number is verified, so they can
+	only use their phone number once to get free trial time, and there
+	will be more accountability because you'll have their real phone
+	number on record.  You can also use the callback verifier to raise
+	their level and give credits (registered version only).
+
+	Some other settings in BBS.INI that might be of interest are
+	RefundPostingTime, which controls whether posting messages costs
+	time like everything else.  If posting time is refunded, it
+	encourages users to post messages without the worry of using up
+	their on-line time.  This is a good idea if you want to stimulate
+	long quality posts.  Users will be willing to spend more time
+	posting if they don't have to worry about paying for it in lost
+	time.  The default is that posts don't cost time.
+
+
+                                      - 15 -
+
+
+
+
+	PayCreditsForPosting controls whether posts are rewarded 25
+	credits per line.  You might want to turn off PayCreditsForPosting
+	if you'll be selling credits, so that real money will be the only
+	way to get credits.  If you're worried that paying credits for
+	posts will encourage garbage posts, you don't need to be.  There
+	is an anti-instant-gratification feature built in that delays the
+	payment by about 2 days, by which time you will have seen the
+	posts and used "/sysop/u" to take away the delayed credits before
+	they arrive.  But, if you'd still rather not give credits for
+	posts, set PayCreditsForPosting to 0.
+
+<A NAME="chap_5_cdrom">	CD-ROM SUPPORT
+
+	The file transfer area can have a transfer section in any
+	directory you give it, either by using the [7] command in the
+	sysop menu or by editing XFERAREA.MNU and XFERAREA.HLP directly.
+	The directory can be a directory on a CD-ROM drive if it has a
+	FILES.BBS file in it, which the BBS can read and use for finding
+	files to download.
+
+	If you have a CD-ROM of files that doesn't have FILES.BBS or
+	FILES.TXT index files in the directories, you can still create a
+	transfer area in JetBBS for downloading from the CD.  Create a new
+	transfer area on the hard drive like "CDDIR", then execute the
+	following command:
+
+	     DIR /S /B /A-D E:\ &gt; C:\BBS\CDDIR\FILES.TXT
+
+	Where "E:\" is the drive of the CD-ROM drive.  This DIR command
+	only works on MS-DOS 6.0 (maybe 5.0) or higher, and creates a list
+	of files not including directories, and including files in sub-
+	directories.  You can add descriptions to the FILES.TXT if you
+	want, as long as the filename is the first thing on the line
+	followed by at least one space and then whatever descriptions you
+	want.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 16 -
+<A NAME="chap_6">
+
+
+
+			      Chapter 6 - Utilities
+
+<A NAME="chap_6_import">	IMPORT UTILITY
+
+	The IMPORT utility converts messages from another BBS and brings
+	them into JetBBS's message base.  The messages to be converted
+	should be in one big text file captured from the other BBS.  If
+	the BBS you're converting from has a capture key for the sysop,
+	you can turn it on, read all the messages on the message base,
+	turn off the capture, and then use the capture file as the input
+	to IMPORT.  If the BBS doesn't have a sysop's capture key, have a
+	user call it up and use the capture buffer on his terminal
+	program.  While you're capturing the messages, make note of a text
+	keyword that is always present in the first line of every message
+	header.  You need to get the case exactly the same.  The longer
+	and more unique the keyword, the better.  Include the spaces if
+	you can.  For example, "Msg #: ", with the trailing space, is
+	good.  When you run the program, it will give you a list of good
+	keywords to use for some of the more popular BBSes.
+
+	When you run IMPORT, it will ask you four questions: The path and
+	filename of the message text you just captured, the header
+	keyword, the room to add the messages to, and the location of your
+	message directory.  The imported messages will be posted in the
+	room like new messages.  It should be OK to dump all the messages
+	into one room, but in some cases the message accessing can get
+	slow when there are too many messages in a single room, especially
+	on a floppy drive or slow hard drive.  A disk cache such as
+	SMARTDRV should fix the problem.  Another solution is to break up
+	your capture files and put the messages in different rooms.
+
+	If you started IMPORT from the same directory where you start
+	JETBBS, and you haven't changed the default MSG directory in
+	BBS.INI, and you're using a hard drive or a single floppy, type
+	"MSG" for the location of your message directory.  In other cases,
+	you should give the full path of your MSG directory.  On a two
+	floppy setup, it's probably "B:\MSG".
+
+	While the program is running, it should print the first line of
+	all the headers that it is finding.  If it's not doing this, the
+	keyword is probably wrong.  You'll need to go into your MSG
+	directory, "cd" into the R# directory of the room you chose, and
+	delete the giant message that got the whole input file dumped into
+	it.  Then "cd" back up to where you were and try again with a
+	different keyword.
+
+<A NAME="chap_6_msgfix">	MSGFIX UTILITY
+
+	The MSGFIX utility can usually recover your message base if it is
+	lost.  Although the message base shouldn't ever get lost, we don't
+	live in a perfect world.  There are two parts of the message base
+	that must both be present for JetBBS to be able to read it.  There
+	are the actual message files themselves that contain the message
+	text, and the MSGLIST.DAT file that tells where each message is
+	stored, who posted it, how long it is, what number it is, and what
+
+                                      - 17 -
+
+
+
+
+	room it's in.  If either or both are lost, the message base is
+	lost.  MSGFIX works in the case where the message text files still
+	exist, but MSGLIST.DAT is lost or corrupted, by rebuilding the
+	MSGLIST.DAT file.  It can't recover all the information that was
+	in MSGLIST.DAT, but it can recover enough to make the messages
+	readable again.  When you run the program it will tell you what
+	the differences are between a reconstructed MSGLIST.DAT and the
+	real thing.
+
+	To run MSGFIX, first "cd" into your MSG directory.  Then, run
+	MSGFIX.  If it doesn't find it, try ..\MSGFIX or give the whole
+	pathname like C:\BBS\MSGFIX.  Read the warnings and then press
+	space to continue.  It will show you the rooms and messages it's
+	finding, so you can check that it's finding what you expect it to
+	find, and then stop before it actually writes MSGLIST.DAT.  If it
+	didn't show any room numbers, or didn't show the right ones, press
+	[CTRL+C] to get out without writing MSGLIST.DAT, otherwise press a
+	key to go ahead.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 18 -
+<A NAME="chap_7">
+
+
+
+			Chapter 7 - Fixing Modem Problems
+
+	Before we begin, it is important for you to realize that modems
+	are not all identical and standard.  They all say they are 100%
+	Hayes Compatible, but this is wishful thinking.  The fact is that
+	the majority of modems are used only for terminal programs to call
+	out to BBSes, so as long as the subset of modem functions that are
+	required for that is standard enough, most buyers are happy.  Even
+	if the modem occasionally gets confused in some circumstances, the
+	user is right there and can fix the problem.  Using a modem to run
+	a BBS exercises many more of the modem's functions that are part
+	of the Hayes standard, but not typically needed by terminal
+	programs, so it is more likely to find bugs in the modem.  What's
+	more, it has to work right every time and in every situation,
+	because the sysop is not present all the time to give it a kick if
+	something goes wrong.
+
+	CHANGING MODEMS
+
+	If you change modems after installing the BBS, you need to change
+	the settings in BBS.INI to support the new modem.  One way to find
+	out the correct settings is to install JetBBS to another directory
+	and see what settings the setup program uses in the new BBS.INI.
+	You can also change the settings by hand.  Here's how to choose
+	the modem-related settings in BBS.INI:
+
+	For 2400 baud and slower modems:
+	     BaudRate: &lt;the speed of the modem&gt;
+	     LockBaudRate: 0
+	     ModemInitString1: AT Z
+	     ModemInitString2: AT &D2 &C1
+	     ModemInitString3: AT E1 Q0 X3 V1 S2=1 S0=1
+
+	For 9600 baud and faster modems:
+	     BaudRate: 57600
+	     LockBaudRate: 1
+	     ModemInitString1: AT Z
+	     ModemInitString2: &lt;depends on brand of modem&gt;
+	     ModemInitString3: AT E1 Q0 X3 V1 S2=1 S0=1
+
+	Here's how to choose ModemInitString2 for high speed modems:
+
+	   Genuine U.S. Robotics Sportster or Courier:
+	       AT&F &H1&R2&B1&A3
+	   Compaq, Intel, NEC, and various other miscelaneous re-branded
+	   modems that used a standards-disregarding chipset:
+	       AT&F \Q3 S95=1
+	   Hayes and all others, U.S. Robotics Sportster Si, Vi:
+	       AT&F &K3 S95=1
+
+	You can always try one of the above init strings and if you
+	guessed right, your modem will say "OK" after it, or "ERROR" if
+	you guessed wrong.
+
+
+
+                                      - 19 -
+
+
+
+
+<A NAME="chap_7_problems">	COMMON PROBLEMS AND SUGGESTED SOLUTIONS
+
+	- The BBS only works at one speed, at other speeds the caller gets
+	pure garbage.
+
+	    This has to do with locked baud rates and the speed of the
+	    serial communication between the computer and the modem.
+	    There are two conventions for controlling the speed of the
+	    serial link between the computer and the modem: step-down,
+	    and locked baud rate.
+
+	    With step-down, which is what 2400 baud and slower modems
+	    use, the modem can only communicate with the computer at the
+	    same speed that it communicates with the caller's modem.  The
+	    BBS originally talks to the modem at its highest speed, and
+	    then when a caller connects, the modem prints "CONNECT
+	    &lt;speed&gt;" right before changing to the caller's speed.  The
+	    BBS sees the connect message and drops down to the same
+	    speed.  When the caller hangs up, both the modem and BBS
+	    return to the highest speed.
+
+	    With locked baud rate, which is used by 14.4k and faster
+	    modems, the communication speed between the computer and
+	    modem is constant and can be faster than the calling modem's
+	    speed.  Since the modem receives data from the computer
+	    faster it can transmit, it buffers the data and uses hardware
+	    flow control to tell the computer when the buffer is full.
+	    For example, you might use a locked baud rate of 57.6k baud
+	    with a 14.4k modem.  The advantage is, because of the
+	    buffering, the computer can send the modem a block of data at
+	    57.6k baud, and then be free to do other things for a while
+	    until the 14.4k modem finishes sending the data.  If the
+	    modem has hardware compression, it may be able to compress
+	    the data in its buffer and send it at a faster speed.
+
+	    Now, here's where the complications arise.  High speed modems
+	    are designed to be compatible with older terminal programs
+	    and BBSes that don't know about locked baud rate and still
+	    think that when they see a "CONNECT &lt;speed&gt;" message, they're
+	    supposed to step-down to &lt;speed&gt;.  So, unless the terminal
+	    program or BBS uses some special modem commands in its AT
+	    init string to let the modem know it's expecting locked baud
+	    rate and hardware flow control, the modem will disable
+	    hardware flow control and might or might not use step-down,
+	    depending on what brand of modem it is.
+
+	    The trick is to make sure both the BBS and the modem are
+	    using locked baud rate and hardware flow control.  On the BBS
+	    side, locked baud rate is controlled by the "LockedBaudRate:"
+	    switch in BBS.INI, and the BBS always uses hardware flow
+	    control.
+
+	    On the modem side, it's a little harder because modem makers
+	    did not agree on a single AT init string for controlling it,
+	    so it depends on the brand of the modem.  U.S. Robotics has
+
+                                      - 20 -
+
+
+
+
+	    made this particularly difficult by having two different
+	    standards and labeling both models "Sportster".
+
+	     Genuine U.S. Robotics Sportster or Courier:
+		 AT&F &H1&R2&B1&A3
+	     Compaq, Intel, NEC, and various other miscelaneous
+	     re-branded modems that used a standards-disregarding
+	     chipset:
+		 AT&F \Q3 S95=1
+	     Hayes and all others, U.S. Robotics Sportster Si, Vi:
+		 AT&F &K3 S95=1
+
+	- The caller log and /who command don't show the speed that the
+	caller called at, they show the higher locked baud rate speed.
+
+	    First, please see the previous question for background on
+	    locked baud rates.  The reason this is happening is, the
+	    modem is trying to be compatible with older terminal programs
+	    and BBSes that don't know about locked baud rate.  It's
+	    afraid that if it prints "CONNECT &lt;speed&gt;" with the actual
+	    speed of the connection, the program will switch to &lt;speed&gt;,
+	    which would be wrong because the modem is using locked baud
+	    rate.  To prevent this, the modem lies to the computer by
+	    telling the locked baud rate speed in the "CONNECT &lt;speed&gt;"
+	    message, so if the BBS switches to that speed, it'll be
+	    switching to the same speed it's already at and everything
+	    will be fine.
+
+	    This scheme works, but it has the drawback that the modem
+	    never tells the BBS the actual speed of the connection, so
+	    the BBS has no way of knowing.  Basically, if you have one of
+	    these modems, there is no practical solution besides getting
+	    a different modem.  If you put the BBS and modem into
+	    step-down mode, you'll solve this problem, but you'll have
+	    all kinds of other performance and configuration problems
+	    because high speed modems don't work very well if they're not
+	    at a locked baud rate.  It's not worth the headache.  My
+	    advice is to live with it.
+
+	- The phone rings but the modem doesn't answer it.
+
+	    Do you see the word "RING" on the screen when they call?
+	      No ---&gt; When the BBS inited the modem, did it print "OK"?
+			No ---&gt; The modem may be on a different COM port,
+				 or Windows may have denied the BBS
+				 access to the COM port.  The BBS is not
+				 communicating with the modem.
+			Yes --&gt; The BBS was able to communicate with the
+				 modem, but the modem doesn't seem to
+				 notice the phone is ringing.  Make sure
+				 the modem is plugged into the right
+				 phone jack.
+	      Yes --&gt; The modem isn't in auto-answer mode.  You can try
+		       to get the modem to auto-answer by making sure
+		       there is an S0=1 in the init string.  If you still
+
+                                      - 21 -
+
+
+
+
+		       can't get the modem to auto-answer, then take S0=1
+		       out of the init string, put in S0=0, and set
+		       "AnswerOnRing: 1" in BBS.INI.  This will make the
+		       BBS take over the job of telling the modem when to
+		       answer the phone.
+
+	- The modem answers but then immediately hangs up.
+
+	    This can happen if "AnswerOnRing:" in BBS.INI is set to 1 and
+	    the modem is also set to auto-answer.  Normally, you should
+	    have the modem auto-answer, and AnswerOnRing set to 0.
+	    AnswerOnRing is provided so if the modem's auto-answer
+	    doesn't work, or you're trying to do some other special trick
+	    like answering only custom ringing, you can set AnswerOnRing
+	    to 1 instead of having the modem auto-answer.  You must not
+	    have both AnswerOnRing and auto-answer.  "AnswerOnRing: 1"
+	    causes the BBS to try to answer the modem when it sees the
+	    "RING" message, and if the modem is also set to auto-answer,
+	    they will both go to answer it at once and the result is that
+	    they step on each other and cause it to hang up.  If you use
+	    AnswerOnRing: 1, you must make sure there is no SO=1 in the
+	    init string, and use S0=0 to turn off auto-answer mode.
+
+	- The BBS doesn't logoff when the user drops carrier.
+
+	    The modem must set carrier detect to depend on reality, not
+	    always on.  One of the ModemInitStrings should have &C1 in it
+	    to configure the modem to tell the BBS whether carrier is
+	    detected.  Some older modems have to be configured by dip
+	    switches, so see your modem manual.  If you have an external
+	    modem, some serial cables do not have the carrier detect (CD)
+	    line.  When you buy a cable for an external modem, you have
+	    to get a modem cable, not a serial printer cable.
+
+	- The Modem doesn't hang up at logoff unless user drops carrier.
+
+	    The modem is ignoring DTR.  The ModemInitStrings should have
+	    &D2 and S2=1 in them as two ways of configuring the modem to
+	    be able to hang up, but some modems have to be configured by
+	    dip switches.  Also, if you have an external modem, some
+	    serial cables do not carry the DTR line.  A serial cable for
+	    a printer won't do, it must be a modem cable.
+
+	- BBS prints ERROR instead of OK after the init line with &D2 &C1
+	  on it.
+
+	    Unless it is having one of the previous two problems, don't
+	    worry about it.  If you are having either of the two
+	    problems, then the reason is that one of the configuration
+	    switches &D2 or &C1 is being ignored.  See &D2 and &C1 in the
+	    list later in this chapter to see what they're supposed to
+	    do, then check your modem manual to figure out what you're
+	    supposed to do to get the same effect.  On some older modems,
+	    you have to use dip-switches to set the configuration.
+	    Briefly, the &D2 configures the modem to allow the BBS to
+
+                                      - 22 -
+
+
+
+
+	    tell it when to hang up.  The &C1 configures the modem to
+	    tell the BBS when carrier is lost.
+
+<A NAME="chap_7_modem_init">	MODEM INIT PARAMETERS
+
+	Z = Reset state.  This is to get the modem in the same state each
+	time.
+
+	Modems are often fussy about hanging up, so the BBS uses two
+	methods with the hope that the modem will respond to at least one
+	of them:
+
+	&D2 = On DTR, hang up, goto command mode, auto-answer off.  This
+	is tried first.  If you have an external modem, the cable must
+	have the DTR line.  Modems default to ignore DTR, but most for
+	most, &D2 makes them respond to it.
+
+	S2 = Set escape character, must be set to 1 (happy face).  If DTR
+	doesn't work, the three happy faces are printed.  S2=1 is
+	necessary because the default is +++, which could be typed by the
+	user.
+
+	&C1 = Carrier detect line depends on presence of carrier.  If the
+	BBS doesn't notice when users drop carrier without logging off,
+	then your modem is keeping the CD (carrier detect) line on all the
+	time.  &C1 for some modems will make the CD line depend on the
+	presence of carrier, but others must have a dip switch changed.
+	See your modem manual if the BBS isn't detecting drop of carrier.
+
+	X1 = Don't act like an ancient 300 baud modem.  Without this, the
+	modem will just print CONNECT no matter what speed the modem
+	connects at, and the BBS will have no way of knowing what speed to
+	change to and will have to assume 300 baud because CONNECT without
+	a speed means 300 baud.
+
+	V1 = Word responses (recommended).  This means that the modem
+	prints, for example, "CONNECT 2400" instead of "10".  The BBS can
+	understand the number codes too, but words are easier for the
+	humans to see if it's working.  For modem speeds above 2400 baud,
+	V1 is important because I'm not sure what the number codes are for
+	every modem, but the BBS will respond to "CONNECT &lt;baud&gt;".
+
+	Q0 = Print result responses.  Without this, the modem won't say
+	what's happening, and the BBS would have no way of knowing what's
+	going on.
+
+	S0 = Auto-answer on or off.
+
+	S7 = Time to wait for carrier on answer, in seconds.
+
+	S10 = Time to wait before dropping line, in tenths of seconds.
+
+
+
+
+
+                                      - 23 -
+<A NAME="chap_8">
+
+
+
+			    Chapter 8 - Using the BBS
+
+<A NAME="chap_8_message_base">	USING THE MESSAGE BASE
+
+	[M] from the main prompt or "/msg" from any prompt gets you to the
+	main message base.  The prompt displays the room number, room
+	name, and the current message number range:
+
+	     01-Lobby [1-56] Msg:
+
+	This example shows room 01, named "Lobby", has 56 messages in it,
+	numbered 1-56.
+
+	     04-Restaraunt Reviews [33-272] Msg:
+
+	This example shows room 04, names "Restaurant Reviews", has 239
+	messages in it, numbered 33-272.  Messages 1-32 in this room were
+	"scrolled", or deleted when the amount of space for messages ran
+	out.  When allocated space runs out, the oldest messages are
+	deleted to make room for new ones.
+
+	[R] Read Messages lets you read messages in order starting from
+	any available message in the message range (given in the message
+	base prompt).  JetBBS will ask you for a starting message number,
+	and will display the messages in that room in order.  If you have
+	specified a pause between each message, at the end of each message
+	there will be a prompt with the available message range:
+
+	     [1-56] ?=help, Read:
+
+	From this prompt you can [Q] Quit reading messages, [E] Enter a
+	message in the middle of reading (good for if you don't want to
+	forget what you're going to say.  Note: The entered message will
+	go at the end of the message list, as if you entered it from the
+	message prompt), type a message number to jump to that message
+	(and continue reading forward from there), or just press [ENTER]
+	to go to the next message.  After the last message, the message
+	base prompt will appear instead of the pause prompt.
+
+	[N] Newscan is like [R] Read Messages except it will start with
+	messages posted since your last call.  If you have specified to
+	see the last old message on new, it will start one message before
+	it.  If on your last call you terminated the session while keeping
+	newscan pointers, [N] Newscan will start with the messages since
+	the last time you terminated without keeping newscan pointers.  If
+	you set your newscan pointers to something different with [V] Set
+	newscan (see below), then it will start with whatever you set.
+
+	While a message scrolls by on the screen (mostly applicable to
+	remote calls; the local terminal might be too fast for these keys
+	to be of any use), you can press [SPACE] to automatically jump to
+	the next message (or quit if there are no more messages), [A]
+	Abort to quit reading messages, or [P] Pause or [CTRL+S] to pause
+	the display.
+
+
+                                      - 24 -
+
+
+
+
+	<A NAME="24_zipscan">There is also a global newscan that allows you to page through all
+	the new messages in every area in the message base.  Type [Z]
+	Zipscan/read all new to use it, or type "/gl" or "/global".
+
+	To enter a message in the current message area displayed by the
+	prompt, press [E] Enter message.  The message editor will pop up:
+
+	     Enter message / 300 lines max / .?=help
+
+	The cursor will be on the next line.  You can type your message.
+	The words will word-wrap at the end of the line.  Once you are
+	finished, you can type ".s" or "/s" on the beginning of a blank
+	line to save the message and exit from the editor.  You can edit
+	what you have with the other editor commands, which are listed
+	when you type ".?".  If you reach the maximum number of lines, the
+	message is automatically saved.
+
+	The full screen editor, which you can switch to by hitting [#] in
+	the message base, is much nicer because it lets you move around
+	with the arrow keys to edit.  The line editor shown above is kept
+	for users who are used to the old way, or if they don't have ANSI
+	or they need to post something with ANSI codes in it, since the
+	full screen editor would try to interpret the ANSI codes itself
+	instead of posting them.
+
+	Type [K] Known rooms to get a list of all the rooms you have
+	access to.  (Rooms a user doesn't have access to will not show up
+	in the list, and the user will not be able to move to them.)
+
+	You can move around the message areas in the message base with [-]
+	or [&lt;] Previous room, [+] or [&gt;] Next room, [J] Jump to room, [G]
+	Goto new, or [U] Ungoto.  [-] or [&lt;] Previous room will go one
+	room number back if the room exists.  [+] or [&gt;] will go one room
+	number forward if the room exists.  [J] Jump to room will let you
+	enter a room number to jump directly to.  If you are the sysop,
+	you can jump to any room, otherwise you are limited to only the
+	ones on the known rooms list.  [G] Goto new will go to the next
+	room with new messages in it; if there are none left, it will go
+	to the first room.  [U] Ungoto is like the Goto new messages
+	command, but it goes in the other direction.
+
+	It is possible for any user to delete his own messages.  Type [D]
+	Delete message and it will prompt for a message number.  This
+	command only lets the user delete messages that that specific user
+	entered; it will not allow the user to delete a message written by
+	another person.
+
+	Note:  The sysop, co-sysops, sub-ops, or room-ops can delete other
+	user's messages with the "/delete" command, or the [D] command in
+	the sysop menu.  (The sysop and co-sysops can delete all messages,
+	sub-ops can delete messages only on their sub-board, and room-ops
+	can delete messages in their room.)
+
+	[V] Set newscan will allow you to change the number of messages
+	considered new by the commands that scan for new messages.  Note:
+
+                                      - 25 -
+
+
+
+
+	The number that this command changes is the number of new messages
+	for the entire board, including sub-boards, based on date.  This
+	command is useful in case you only want to read some of the latest
+	messages but a large number of messages are considered new (if you
+	went on vacation, for example, and the new messages piled up since
+	over a month ago and you don't want to read a month's worth of
+	messages).
+
+	[Y] Post anonymous will let you post a message without your name
+	or the date and time showing up in the message header.
+
+	Note: Because the anonymous function can be abused, in the default
+	MNU files, the anonymous posting function is set at level 2
+	instead of the normal level 1.  This can be changed by the sysop
+	by editing MSG.MNU.
+
+<A NAME="chap_8_sub-boards">	SUB-BOARDS
+
+	To get to the sub-boards from either the message prompt or the
+	main menu, press [S].  You will see a list of the sub-boards you
+	have access to with their one-line advertisements.  If you do not
+	have access to any sub-boards (or all the sub-boards are closed),
+	you are told so and are returned to the message prompt.
+	Otherwise, you'll see a welcome screen (if available--optional,
+	sub-op's prerogative).
+
+	It is important to note the sub-boards have a separate access
+	system from the rest of the BBS (with the exception that the sysop
+	of the BBS has complete power over everything).  It can have a
+	sub-op, which has complete control over the sub (besides the
+	sysop, of course), it can be made private with only select members
+	of the userlog allowed, and it can have different access levels
+	for each room (and room-ops) that deal with the sub-board's access
+	userlog.
+
+	Sub-boards act just like the main message base.  All the commands
+	for the main message base apply.  The sub-board prompt is
+	different; it doesn't have the room number.  (This is a good way
+	to tell if you're in a sub-board or not.)
+
+<A NAME="chap_8_email">	E-MAIL
+
+	From the main menu, [E] Send E-mail, or "/mail" from anywhere,
+	will let you send electronic mail to another user.  Simply enter
+	the name, number, or part of the name of the user you want to send
+	it to, and enter the message.
+
+	When you log on, if you have mail waiting, it is automatically
+	displayed.  After each message, you will be given a chance to re-
+	read it, delete the individual message, or send e-mail (to the
+	person who sent it or to anyone else).  Mail that you don't delete
+	will appear again on your next call.
+
+	If you want to read waiting mail while on-line, type "/readmail"
+	at a prompt.  In the default menus there is no one-key command for
+
+                                      - 26 -
+
+
+
+
+	this, but you, the sysop, can edit an MNU file and add it to one
+	of the menus.  You can use this command to review mail, or read
+	new mail that just came in if it was a multi-line system and a
+	user on another line just sent you mail.
+
+<A NAME="chap_8_auto-message">	AUTO-MESSAGE, BOARD NEWS, AND LOGON MESSAGES
+
+	You can access the Auto-Message menu with [A] from the main menu
+	or "/auto-msg" from any command prompt.  The Logon Messages, if
+	they exist, are always displayed after someone logs on.  The
+	Auto-Message and Board News are displayed only when the user
+	hasn't seen them yet.  The Logon Messages and Board News are
+	posted by the sysop only, and the Auto-Message can be posted by
+	level 3 users and up.
+
+	[N] Read the Board News displays the current Board News.  [R] Read
+	the Auto-Message displays the current Auto-Message.  [P] Post the
+	Auto-Message wipes out the old Auto-Message and lets you enter a
+	new one (level 3 only).  [L] Edit Logon Messages lets you edit one
+	of the three available Logon Messages to be displayed between the
+	user stats and the Board News after the logon sequence.
+
+<A NAME="chap_8_borderlines">	BORDERLINES
+
+	Borderlines are one line messages that appear before every
+	occurrence of the main menu prompt.  They can be read as a list or
+	posted by anyone.  [B] or "/border" gets to the borderline menu.
+	You can [R] Read the borderlines, [P] Post a borderline, [A] Post
+	an anonymous borderline, or [S] See border authors.  There are 10
+	borderlines, numbered 0 to 9.  You can read the list, post your
+	own (wiping out the old one to put a new one in its place), or see
+	the authors of the borderlines (who posted them).  Seeing the
+	borderline authors takes a small number of credits to do; you can
+	purchase a peek for 200 credits.  If you don't want people to see
+	your name when they look at the authors, you can post one
+	anonymously like you can a message.
+
+<A NAME="chap_8_file_transfers">	FILE TRANSFERS
+
+	The main file transfer section is accessible from the main menu
+	with [X] File Transfer Menu or "/xfer".  You will see a menu of
+	file areas, plus an option to [S] Upload to Sysop (any user can
+	upload a file to the sysop's private directory, where no one can
+	download it until the sysop moves it to another file area).  The
+	file areas themselves are customizable by the sysop.
+
+<A NAME="chap_8_BBS_phone_list">	BBS PHONE LIST
+
+	[P] Phone list of other BBSes or "/phone" gets you to a BBS
+	phonebook.  This list of BBSes can be added to by anyone with [P]
+	Post/add a BBS to the list, and can be read by anyone with [R]
+	Read the BBS list.  This is a good way to promote other BBSes in
+	the area, and can build a good small database for other BBSes.
+
+
+
+                                      - 27 -
+
+
+
+
+<A NAME="chap_8_userlog_menu">	USERLOG MENU
+
+	To get to the userlog menu, type [U] from the main menu or
+	"/userlog".  From the userlog menu, you can examine or change your
+	own stats and password, change your BBS preferences, examine other
+	accounts, see the caller log, examine and search the database of
+	users, or see an automatically generated call-times chart.
+
+<A NAME="27_user_stats">	[Y] Your user stats "/stats" displays what is currently on record
+	as your age, access level, the number of credits you have, the
+	number of times you called the BBS, the number of posts you've
+	made with the total number of lines posted, the date and time of
+	your last call, and how much time you spent on the current call
+	and how much you have left.  You can modify this command by
+	editing STATS.MNU.
+
+	[I] Change your user info "/userinfo" lets you change your name,
+	password, computer type, city and state, phone number and first
+	name, age, ANSI mode, screen height, and other preferences.  These
+	questions are the ones asked of newusers, plus some additional
+	settings.
+
+	[P] Change your password "/password" lets you change your password
+	only.
+
+	[A] List the entire userlog "/allusers" shows a summary list of
+	every account on the BBS.
+
+	[C] Calling times chart "/calltimes" displays a chart of the
+	number of calls during the periods in the day.  This is a good way
+	to see when the least busy time of day is to call.
+
+	[W] Weekly calling trends chart "/calltrends" displays a chart of
+	the number of calls over the past several weeks.
+
+	[D] Days-of-the-week calling chart "/calldays" tells you how much
+	the BBS is being used on each day of the week.
+
+	[L] Caller Log "/callers" shows a list of a few recent callers
+	with their names and the times they logged off.  The number of
+	lines can be adjusted by editing the file SYS\CALLERS.TXT and
+	deleting lines or adding extra blank lines.
+
+<A NAME="chap_8_message_base_and_userlog_scrolling">	MESSAGE BASE AND USERLOG SCROLLING
+
+	When a new message is posted and the message base has already
+	expanded to its size limit, the oldest message or messages are
+	deleted to make space for the new one.  The old messages can be
+	anywhere on the main message base or in the Sub-Boards.  So,
+	messages exist for a certain length of time and then scroll,
+	regardless of where they are.  The number of messages in a room
+	increases in the popular rooms and decreases in slower ones.
+
+	The JetBBS userlog recycles ("scrolls") accounts in a way similar
+	to how it scrolls messages.  When a new user logs on, it searches
+
+                                      - 28 -
+
+
+
+
+	for the account that has been inactive for the longest time and
+	re-uses it, with some exceptions depending on access level and
+	number of calls.  The majority of accounts are new users who
+	called once and never called back, and they scroll the fastest.
+	Accounts with 2-9 calls take twice as long to scroll, and accounts
+	with 10 or more calls take 4 times as long to scroll.  On top of
+	that, an access level of 2 multiplies the time to scroll by 4
+	again, so a level 2 user who has called more than 10 times will
+	take 16 times as long to scroll as an account that was only used
+	once and then abandoned.  Accounts with level 3 and above never
+	scroll.  My experience has been that with 200 accounts, abandoned
+	accounts with 1 call last about 1 1/2 months, 2-9 calls last 3
+	months, and 10+ calls last 6 months.
+
+<A NAME="chap_8_access_level">	ACCESS LEVELS
+
+	    Level 1 - New user, can't post auto-message, post 1 border
+			per day, no anonymous messages
+	    Level 2 - Scrolls 4 times slower than level 1
+	    Level 3 - Non-scrolling, a typical level for regular callers
+	    Level 4 - Can make voting polls
+	    Level 5 - Has /rename, /delete, and /move commands, typically
+			used for trusted users
+	    Level 8 - Semi-sysop, can do msg base stuff but not userlog
+	    Level 9 - Sysop
+
+<A NAME="chap_8_sysop_func_keys">	SYSOP FUNCTION KEYS
+
+	[F1] Help Screen - Brief version of this list.
+
+	[F2] Chat - Go into chat mode.  You can press this anytime the BBS
+	is waiting for the user to enter something.  To leave chat, press
+	the [F2] key again.  As you leave, it will reprint the line that
+	the user was on so he can be reminded of what he was supposed to
+	enter and pick up where he left off.  If you use chat in the
+	editor on a blank line, it may be a bit confusing when you leave
+	chat.  Type ".l" to re-list the message so he can see what he was
+	doing.
+
+	[F3] Temp Sysop - Toggles temporary sysop access on and off.  At
+	the end of the call, the level will go back to normal.
+
+	[F4] Print Password - Print user's info, including password.  If
+	you see someone logging on who has forgotten his password, and you
+	want to give him a hint, you could have him enter his account
+	number and then you can press [F4] to see his password.  The
+	password and info are printed locally only.
+
+	[F5] Forced Logoff - Prints the ForceLogoffPrint string from
+	BBS.INI and then hangs up.  The default message printed is "Have a
+	nice day :)".
+
+	[F7] Edit This User - Edit the user who is currently on-line.
+
+	[F9] Status Bar on/off - So you'll have more room on the screen.
+
+                                      - 29 -
+
+
+
+
+
+	[F10] Capture on/off - Copy all text printed to the screen to
+	CAPTURE.TXT.  If the file already exists, it is replaced by the
+	new text.
+
+	[SCROLL LOCK] Sysop Not Available - The chat call is disabled when
+	scroll lock is turned on.
+
+	[ALT+X] Exit - Works anytime the BBS is ready for input.  Logs off
+	and hangs up if necessary.
+
+	[CTRL+C] or [CTRL+BREAK] Brute Force Exit - Works like [ALT+X] but
+	doesn't hang up if on-line.  You could run a terminal program next
+	and the user will still be connected.
+
+	[RIGHT ARROW] Increase Credits by 100cr.
+
+	[LEFT ARROW] Decrease Credits by 100cr.
+
+	[UP ARROW] Increase Time Left by 10 minutes.
+
+	[DOWN ARROW] Decrease Time Left by 10 minutes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 30 -
+<A NAME="chap_9">
+
+
+
+			     Chapter 9 - MNU Tutorial
+
+<A NAME="chap_9_menu_block">	MNU FILE "[MENU]" BLOCK
+
+	    This section will take an in-depth look at the BBS's menus.  They
+	    have the file extension MNU and are located in the \BBS\MNU
+	    directory.  We will also go step by step through the process of
+	    adding, modifying, or removing commands from menus.  The following
+	    is an example of some standard lines in an MNU file.  They were
+	    taken from the main menu (MAIN.MNU):
+
+	    [menu]
+
+	    ;key	command				 level	print
+
+	    u,		goto userlog.mnu,		    1,	Userlog;
+	    c,		chat,				    1,	Chat;
+	    o,		logoff,				    0,	Off/hang up;
+	    e,		sendmail,			    1,	Send e-mail;
+	    f,		feedback,			    0,	Feedback;
+
+	    As you can see, the "[menu]" portion of the menu consists of the
+	    "key" which is the letter or number that the user must press in
+	    order to execute the command; the "command" which tells JetBBS
+	    what to execute when the key is pressed; the level that the user
+	    must have in order to execute the command; and the message to
+	    display when the key is pressed.  Commas are used to separate each
+	    portion of the line, and a semicolon is the last character of the
+	    line to which signifies the end.
+
+	    The second way of accessing a command in JetBBS is to type "/"
+	    followed by a command as displayed in the following excerpt from
+	    GLOBAL.MNU.  GLOBAL.MNU is special because it contains commands
+	    that can be accessed ANYWHERE on the BBS simply by typing "/" and
+	    then the command.  For this reason, they are extremely useful
+	    commands.  After learning them, you don't have to pay attention to
+	    what menu you are in, and try to examine the help file to figure
+	    out how to get to where you want to go.  An example would be
+	    "/msg" which would take you directly to the message base.  The
+	    following are commands currently in your GLOBAL.MNU and do the
+	    exact same things that those you see above.  These, however, are
+	    ways of accessing the command with the "/" key from anywhere on
+	    the BBS.
+
+	    [menu]
+
+	    ;entry		command				 level	print
+
+	    userlog,		goto userlog.mnu,		    1,	;
+	    chat,		chat,				    1,	;
+	    off,		logoff,				    0,	;
+	    mail,		sendmail,			    1,	;
+	    feedback,		feedback,			    0,	;
+
+
+
+                                      - 31 -
+
+
+
+
+	    You can see how useful it would be to be able to access these
+	    commands anywhere.  If you were reading messages in the message
+	    base and wanted to go to the userlog to see how much time you had
+	    left on-line, you could either quit to the main menu, locate the
+	    key to hit to go to the userlog, and then hit it; or you could
+	    just type "/userlog" and be there in an instant.
+
+	    You can also combine a menu and the command you want to execute in
+	    that menu all into a "/" command.  Let's use the previous example
+	    of wanting to know how much time you had left on-line.  Instead of
+	    typing "/userlog" to get to the userlog and then [Y] to see your
+	    stats, you could simply type "/userlog/y" which would tell Jet to
+	    execute the [Y] command in the userlog with you not even having to
+	    move from your present location on the board.
+
+	    A "/" command can also act as a password.  Let's say that you only
+	    wanted a certain person to be able to chat with you and didn't
+	    want to ever be disturbed by anyone else.  You could change the
+	    "/chat" command to something that only that person would know.
+
+	    ;entry		command				 level	print
+
+	    abcdefg,		chatloud,			    1,  ;
+
+	    By entering "/abcdefg" the person would then be able to execute
+	    the chat command.  This is a good example of how flexible the MNU
+	    files are.  Anything you wish may be put in the "entry" part of
+	    the MNU files.
+
+	    The next portion of the MNU files that we will look at will be the
+	    commands.  As previously described, the "command" is the portion
+	    of the MNU file that tells JetBBS what to do when a specific key
+	    is hit, or a "/" command is typed in.  Commands are fairly
+	    configurable, and can easily be modified.  There is a complete
+	    listing of MNU commands included later on in this documentation.
+	    For now, we will use several examples to convey the versatility of
+	    the MNU files.
+
+	    One of the most common and important MNU commands is the "goto"
+	    command.  It can be used to tell the BBS to go to another MNU
+	    file.  This is how you move from one place to the next in Jet.
+	    The following are some examples of where the "goto" command is
+	    used on the BBS.  The following are all commands that are used in
+	    your main menu.
+
+	    ;key	command				 level	print
+
+	    a,		goto auto-msg.mnu,		    1,	Auto-Message;
+	    b,		goto border.mnu,		    1,	Borderlines;
+	    u,		goto userlog.mnu,		    1,	Userlog;
+	    p,		goto phone.mnu,			    1,	Phone list;
+
+	    Included with the reference section is a complete listing of all
+	    commands that may be used in the MNU files.  You can create your
+	    own menus by locating the commands you would like to have in the
+
+                                      - 32 -
+
+
+
+
+	    menu, and then creating a text file.  This text file should be
+	    named whatever you would like the menu to be called, with a ".MNU"
+	    file extension.  Make sure you create it in the \BBS\MNU
+	    directory.
+
+	    If your menu is going to contain a "[do]" block, then create that
+	    first followed by the "[menu]" block.  One of the most common
+	    mistakes is forgetting to include an option which will allow the
+	    user quit to the previous menu.  In most circumstances, the
+	    "gotoprev" command should be used.  The only thing left to do is
+	    create a command elsewhere on the BBS which will access this MNU
+	    file.  The command should use the "goto" command to tell the BBS
+	    to go to your menu.
+
+	    If you want to make a menu where the user types a command and then
+	    presses enter, rather than the BBS immediately executing the
+	    command after one key, change [menu] to [multikeymenu].  For
+	    example, if you have a menu like the menu I made for the CD-ROM of
+	    shareware mentioned on the registration form:
+
+		       The Best of JCSM CD-ROM -- Select a file section
+
+	     [ 1] Accounting/Financial	[20] Game-Board		[41] Music
+	     [ 2] BBS Systems		[21] Game-Card		[42] Productivity
+	     [ 3] Business		[22] Game-Casino	[43] Progmer's Tools/Li
+	     [ 4] Calculators		[24] Game-Hints/Unprots	[44] Religious
+	     [ 5] Cataloging		[25] Game-Simulator	[45] Science/Math
+	     [ 6] Communications	[26] Game-Super VGA	[46] Sports
+	     [ 7] Databases-Applicatns	[27] Game-Other		[47] Speech
+	     [ 8] DataBases-Full Feat.	[28] Geneology		[48] Utilities
+	     [ 9] Databases-Other	[29] Graphics-CAD	[49] Virus Protection
+	     [10] DeskTop Publishing	[30] Graphics-Images	[50] Word Processors
+	     [11] Editors		[31] Graphics-Programs	[51] Writing Aids
+	     [12] Educational		[32] Hobbies		[52] Other
+	     [13] Electronic Books	[33] Home/Personal
+	     [14] Financial		[34] Humor		[A] All Files
+	     [15] Fonts			[35] Icons		[Q] Quit
+	     [16] MVP Software		[36] Marketing Aids
+	     [17] Apogee Software	[37] Legal
+	     [18] Game-Action		[38] Lotto Programs
+	     [19] Game-Arcade		[39] Medical/Health
+
+	    For this menu, I wanted users to be able to type two digit numbers
+	    without having to enter "/" first, so I used [multikeymenu] in the
+	    menu.  If you prefer pressing enter after commands, you can change
+	    all the [menu] lines in all the MNU files to [multikeymenu].
+
+
+
+
+
+
+
+
+
+
+                                      - 33 -
+
+
+
+
+<A NAME="chap_9_do_block">	MNU FILE "[DO]" BLOCK
+
+	    The "[do]" block of a menu file contains a list of commands to be
+	    executed as soon as a user enters the menu.  Earlier, we discussed
+	    FIRST.MNU which is made up entirely of a "[do]" block.  The user
+	    has no choice about whether the commands in the "[do]" block are
+	    executed, they are automatic.  A common command you may want to
+	    place in the "[do]" block of a menu would be "help", which
+	    instructs JetBBS to display the menu.  This way, the menu would
+	    display automatically every time a user enters it, instead of
+	    waiting for them to press "?".  That is only one of the numerous
+	    commands you can place in the "[do]" block.  You can place any MNU
+	    command in the "[do]" block if you want them to be automatically
+	    executed.
+
+	    You should note that if you add a "[do]" block to a menu, you will
+	    no longer be able to preload that menu.  You should then remove
+	    that menu from the "Preload:" sequence in the BBS.INI file.  This
+	    should not cause a considerable slow down unless you are running
+	    JetBBS on a floppy drive.  You may then want to consider only
+	    adding a "[do]" block to menus that are not preloaded.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 34 -
+<A NAME="chap_10">
+
+
+
+		 Chapter 10 - MNU %variable% Replacement Keywords
+
+	Many of variables can be changed with the `let` and `eval`
+	commands.
+
+	USER INFO
+
+	    %name%	      - Name
+	    %usernumber%      - Account number
+	    %level%	      - Access level
+	    %calls%	      - Total calls
+	    %callsleft%	      - Calls left today
+	    %callstoday%      - Calls used today
+	    %minutesonline%   - Time used so far on this call
+	    %minutesleft%     - Time left
+	    %posts%	      - Total messages posted by user
+	    %linesposted%     - Lines posted, calculated by characters posted
+				  divided by 80
+	    %callswhileaway%  - Number of calls since user's last call
+	    %lastcalldate%    - Example: "Monday, May 15, 8:32pm"
+	    %credits%	      - Credits
+	    %userinfo1%	      - User info fields
+	       ...
+	    %userinfo9%
+	    %userinfo1desc%   - Descriptions of user info fields
+	       ...
+	    %userinfo9desc%
+	    %ansi%	      - 1=ANSI mode on, 0=no ANSI
+	    %delayedcredits%  - Credits to be payed in a few days
+	    %mailcount%	      - Number of e-mail messages user has
+	    %mailnew%	      - Number of new e-mail messages
+	    %rows%	      - Height of screen
+	    %fsedit%	      - 1=Full Screen Editor, 0=Line Editor
+	    %stopaftermessage%- 1=Stop after each message, 0=Continuous
+	    %readoneold%      - 1=Yes, 0=No
+	    %title%	      - Printed before user's name in square brackets
+	    %surname%	      - Printed after user's name in square brackets
+	    %noletterbomb%    - 1=Account owns letterbomb defusal kit, 0=No
+	    %firstnewmail%    - E-mail message number of first e-mail message
+	    %callernumber%    - # of calls the BBS has had, displayed on
+				  logoff
+	    %screenpauseline% - How many lines to print before pausing
+	    %realname%	      - User's real name
+	    %address1%	      - Street address part of address
+	    %address2%	      - City, State, Zip, this is used by door games
+	    %clearscreenbeforehelp% - 1=Clear screen before each menu
+	    %firstcalldate%   - Date that the account was created
+	    %continuous%      - 1=Don't pause after screenfull
+	    %expert%	      - 1=Expert mode, 0=Novice mode
+	    %internetmail%    - 1=Can send internet mail (registered ver)
+	    %netname1%	      - Network mail name (registered ver)
+	    %netname2%	      - Alternate network mail name (registered ver)
+	    %netname3%	      - Alternate network mail name (registered ver)
+	    %networkallowed%  - 1=Account enabled for netting (regd ver)
+
+
+                                      - 35 -
+
+
+
+
+	MESSAGE BASE
+
+	    %room%	      - Current room number
+	    %roomname%	      - Current room name
+	    %firstmsg%	      - First message number in room
+	    %lastmsg%	      - Last message number in room
+	    %sub%	      - Sub-Board number, 0 is Main Message Base
+	    %totalmsgs%	      - Total messages on the message base
+	    %newmsgs%	      - New messages posted since last call
+	    %unreadmsgs%      - Number of unread messages
+	    %firstnewmsginroom%- Message number of first new message in room
+	    %totalnewmsgs%    - Number of new messages in the message base
+	    %newmsgsinroom%   - Number of new messages in current room
+	    %roomdirnumber%   - Absolute room number, where sub-board rooms
+				  are in the 100+ range.
+
+	DIRECTORIES AND FILES
+								default:
+	    %sysdir%	      - BBS data files			SYS\
+	    %textdir%	      - Text files that you can edit	TEXT\
+	    %menudir%	      - MNU files, configurable menus	MNU\
+	    %msgdir%	      - Messages, stored in text format MSG\
+	    %bbsmaildir%      - Private mail			BBSMAIL\
+	    %ramdrivedir%     - Small temporary files
+	    %logfile%	      - Path and filename of log file	LOG.TXT
+	    %mnufile%	      - MNU file of the current menu
+	    %roomop%	      - User number of the room subop, 0 if none
+
+	TRANSFERS
+
+	    %transname%	      - Name of xfer area, e.g. "Upload To Sysop"
+	    %dldir%	      - Directory for downloads, set by gototrans
+	    %uldir%	      - Directory for uploads, set by gototrans
+	    %xferfilename%    - File to transfer, set by gotoupload or
+				  gotodownload
+	    %uploadcreditsperk%- The credit reward for uploading files.
+	    %downloadcreditspermin% - Credits charged for downloading time.
+
+	MODEM
+
+	    %com%	      - COM port number
+	    %baseaddr%	      - Base address of COM port; 3F8 for COM1, 2F8
+				  for COM2, 3E8 for COM3, 2E8 for COM4.
+				  Useful for door programs.
+	    %irq%	      - Interrupt number. Typically 2, 3, 4, 5, or 7.
+	    %baud%	      - Baud speed between the BBS computer and the
+				  BBS modem.  If the baud speed needs to be
+				  passed to another program such as a door
+				  program, use this value.
+	    %modembaud%	      - Baud speed between the BBS modem and the
+				  caller's modem.  This can be different from
+				  %baud% with a high speed modem and
+				  LockedBaudRate on.  This value cannot be
+				  determined with some high speed modems, and
+
+
+                                      - 36 -
+
+
+
+
+				  should only be used for displaying to the
+				  user.
+
+	SPECIAL CHARACTERS
+
+	    %cr%	      - "&lt;newline&gt;"
+	    %bs%	      - "&lt;backspace&gt;"
+	    %comma% or %c%    - ","
+	    %esc%	      - "&lt;escape&gt;"
+
+	ANSI COLORS
+
+	    %reset%	      - Reset to default colors and turn off bold
+	    %bold%	      - Bold, this affects the foreground color
+	    %blackfg%	      - Black foreground
+	    %redfg%	      - Red foreground
+	    %greenfg%	      - Green foreground
+	    %yellowfg%	      - Yellow foreground if bold, brown if not
+	    %bluefg%	      - Blue foreground
+	    %purplefg%	      - Purple foreground
+	    %cyanfg%	      - Cyan foreground
+	    %whitefg%	      - White foreground
+	    %blackbg%	      - Black background
+	    %redbg%	      - Red background
+	    %greenbg%	      - Green background
+	    %yellowbg%	      - Yellowish brown background
+	    %bluebg%	      - Blue background
+	    %purplebg%	      - Purple background
+	    %cyanbg%	      - Cyan background
+	    %whitebg%	      - White background
+
+	DATE AND TIME
+
+	    %date%	      - Example: 4/6/96
+	    %datetime%	      - Example: Saturday, Apr 6, 1996	 3:13pm
+	    %datetimeshort%   - Example: 4/6/96, 3:13pm
+	    %datetimelong%    - Example: Sat, 6 Apr 1996 15:13:13 -0700 (PDT)
+	    %time%	      - Example: 3:13pm
+	    %second%	      - 0 to 59
+	    %minute%	      - 0 to 59
+	    %hour%	      - Hour in military time, 0 to 23
+	    %day%	      - Day of the month, 1 to 31
+	    %weekday%	      - Example: Monday
+	    %month%	      - Example: May
+	    %monthnumber%     - Month number, 1 to 12
+	    %year%	      - Example: 1996
+
+	GENERAL
+
+	    %prefix%	      - The current menu name
+	    %newuserstring%   - The string that new users have to type to log
+				  on as new
+	    %firstmenu%	      - The MNU file to start with, normally
+				  FIRST.MNU
+	    %1%		      - Parameter passed on goto command
+
+                                      - 37 -
+
+
+
+
+	    %linesinuse%      - How many non-local lines are logged in
+	    %inputret%	      - Text entered to the input command
+	    %printfileret%    - Result of printfile command.  Possible values
+				  are ABORT, SKIP, FILENOTFOUND, or NORMAL if
+				  there is no error.
+	    %yesnoret%	      - Result of yesno command.  Possible values are
+				  YES and NO.
+	    %rand%	      - Random number in the range 0-999.  Useful
+				  with comparisons like "if %rand% &lt; 500 goto
+				  true".  To get a smaller range, use the
+				  `eval` command, for example: "eval var =
+				  %rand% % 6 + 1" for 1 to 6.
+	    %scrolllock%      - 1=Scroll lock is on, 0=It's off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 38 -
+<A NAME="chap_11">
+
+
+
+			Chapter 11 - MNU Command Reference
+
+	  `command` = An MNU command.
+	&lt;parameter&gt; = Required parameter.
+	[parameter] = Optional parameter.  Usually the user is prompted
+			for this information if it is omitted.
+
+<A NAME="chap_11_auto-message">	AUTO-MESSAGE
+
+	    postautomessage
+		Posts the Auto-Message and marks it as new.  It will be
+		read to the next 30 callers and then only to users who
+		haven't seen it once.
+
+	    checkboardnews
+		Prints the Board News message if it is new.  See also
+		`postboardnews` in the "sysop" section.
+
+	    checkautomessage
+		Prints the Auto-Message if it is new.
+
+<A NAME="chap_11_bank">	BANK
+
+	    sendcheck [user]
+		Sends e-mail with credits attached to it.  The credits
+		are actually on the e-mail letter, so if the recipient
+		never calls again and his account eventually scrolls, the
+		credits are lost.
+
+	    sendletterbomb [user]
+		Sends e-mail with a letterbomb attached to it.  The
+		letterbomb causes the recipient to get hung up the first
+		time he reads the message.  The e-mail message is
+		anonymous, and there is no other way to send anonymous
+		e-mail.  The price is a very steep 5000cr.
+
+	    buyletterbombkit
+		Buys immunity to letterbombs for 25000cr.
+
+	    buylevel &lt;level&gt; &lt;price&gt;
+		&lt;level&gt; is the level available for purchase, and &lt;price&gt;
+		is the price in credits.  The user has to be one level
+		below the level being purchased, so there's no jumping
+		over multiple levels at once.  There is a sample of this
+		command in BANK.MNU that you can uncomment if you want to
+		use it.
+
+	    borderauthors
+		For 200cr, the authors of non-anonymous borders can be
+		viewed.  The `readborders` command is modified for the
+		remainder of the call to also show authors.  See also
+		`readborders` and `postborderanon`.
+
+	    buytime &lt;price_per_minute&gt; [minutes]
+		Buy time with credits.
+
+                                      - 39 -
+
+
+
+
+
+	    selltime &lt;credits_per_minute_sold&gt; [minutes]
+		Sell back time for credits.  See BANK.MNU for more
+		information.
+
+	    buycasinogame
+		Buy a casino game at the price set by the owner with
+		`casinogamesetsellingprice`.  Any credits in the game
+		will be mailed back to the previous owner, along with the
+		payment for the game.
+
+	    slot
+	    double
+	    greed
+	    craps
+	    roulette
+	    six
+	    virushunter
+	    bignum
+		Play casino games.
+
+	    slotcredit
+	    doublecredit
+	    greedcredit
+	    crapscredit
+	    roulettecredit
+	    sixcredit
+	    virushuntercredit
+	    bignumcredit
+		Each game has its own credit reserve.  This command dumps
+		the credits into your account and then asks how much you
+		want to put back.  This command can be used by game
+		owners and sysops.
+
+	    slotowner
+	    doubleowner
+	    greedowner
+	    crapsowner
+	    rouletteowner
+	    sixowner
+	    virushunterowner
+	    bignumowner
+		Set the owner of the casino game.  This command can be
+		used by game owners and sysops.  It allows the game owner
+		to transfer ownership to another user.
+
+	    casinogamesetsellingprice
+		Lets the owner of a casino game set the selling price.
+
+	    gotoifchargecredits &lt;credits&gt; &lt;menu.mnu&gt;
+		Checks that the user has enough credits, and tells how
+		much it'll cost and confirms that the user wants to spend
+		the credits.  If they do, it'll go to &lt;menu.mnu&gt; and
+		subtract the amount from their account.
+
+
+                                      - 40 -
+
+
+
+
+<A NAME="chap_11_borderlines">	BORDERLINES
+
+	    postborder [number]
+		Posts one of the one line messages that are printed
+		between commands in the main menu.  Level 1 users may
+		only post one per call.
+
+	    postborderanon [number]
+		Same as `postborder` but does not record the name of the
+		person posting the border.  It costs 700cr to use this
+		feature.  See also `borderauthors`.
+
+	    readborders
+		Lists the borders.  If `borderauthors` has been used,
+		this command also lists the authors of the borders.  See
+		also `borderauthors`.
+
+	    borderauthors
+		For 200cr, the authors of non-anonymous borders can be
+		viewed.  The `readborders` command is modified for the
+		remainder of the call to also show authors.  See also
+		`readborders` and `postborderanon`.
+
+<A NAME="chap_11_doors">	DOORS
+
+	    calldoor &lt;command_line&gt;
+		This is the main interface for calling door programs.
+		JetBBS writes four formats of door drop files:
+
+		       Drop file      Other BBSes that use it
+		       ----------     -----------------------
+		       DORINFO1.DEF   RBBS, QBBS, FoReM, TPB, T.A.G.
+		       CALLINFO.BBS   Wildcat!
+		       CHAIN.TXT      WWIV, Telegard
+		       DOOR.SYS	      Generic
+
+		Door programs must read one of these files to find out
+		necessary information such as the COM port, baud speed,
+		the user's name, etc.  Ways of telling the door program
+		where to find the drop file vary from program to program.
+		In most cases you will need to write a short batch file
+		to set up a door, if one is not already supplied with the
+		door.  If the door takes a command line parameter naming
+		the directory and filename of the drop file, the batch
+		file is usually like this:  (supposing the name of the
+		program is "SPACEWAR" and it is in the directory
+		C:\BBS\SW)
+
+		     CD SW
+		     SPACEWAR ..\DORINFO1.DEF
+		     ..\SCROLLDN
+		     CD ..
+
+		The reason I added ..\SCROLLDN is to scroll the screen
+		down 4 lines on exit so the BBS's status bar doesn't
+
+                                      - 41 -
+
+
+
+
+		cover up important error information at the top of the
+		screen if something goes wrong.  ..\SCROLLDN is not
+		essential.  Other door programs assume the drop file is
+		in the same directory, so the batch file should copy it
+		into the directory.  For example:
+
+		     COPY DORINFO1.DEF SW
+		     CD SW
+		     SPACEWAR
+		     ..\SCROLLDN
+		     CD ..
+
+		Those are the two most typical ways, but door programs
+		vary widely.  TradeWars looks through the directories
+		listed in your PATH environment variable, so you have to
+		make sure the BBS's directory is in your path.  There are
+		others that have to convert the door file to their own
+		special format first, so they supply their own batch file
+		for you to run.  Some require you to put the path of the
+		drop file in a .CFG file.  You can use the [6] command in
+		the sysop menu to add a calldoor command to your DOOR.MNU
+		file.  The command line you give it is just the name of
+		the batch file.
+
+	    calldoor2 &lt;command_line&gt;
+		Similar to `calldoor`, but uses a less aggressive swapper
+		mechanism that may prevent conflicts with the door game
+		if there are problems with crashing on the way out of a
+		particular door game.  The tradeoff is that the less
+		aggressive swapper does not leave as much memory for the
+		door game.
+
+	    calldoornoswap &lt;command_line&gt;
+		Similar to `calldoor`, but does not attempt to swap the
+		BBS out to EMS memory or disk to make more room for the
+		door program.  A few door programs mess up the system so
+		that the BBS can't swap itself back in when the door
+		exits.
+
+	    setdoordir &lt;directory&gt;
+		For calling door programs on a multi-line board, it is
+		necessary to get the door drop files in a different
+		directory for each line, so that the lines don't
+		interfere with each other's drop files.  The recommended
+		way that is given in DOOR.MNU is `setdoordir` DOOR%com%.
+		MKDIR the directories DOOR0 through DOOR4 and then call
+		your door programs with a parameter to set the path of
+		the door file.  For example, `calldoor` DOORPROG.BAT
+		C:\BBS\DOOR%com%\DORINFO1.TXT.  DOORPROG.BAT should then
+		pass the parameter to the program by using the batch file
+		%1 variable.  For example:
+
+		     CD SW
+		     SPACEWAR %1
+		     ..\SCROLLDN
+
+                                      - 42 -
+
+
+
+
+		     CD ..
+
+		If the door program does not allow you to specify the
+		path of the drop file, setting it up for multi-line can
+		be more difficult.
+
+	    setdoornum &lt;number&gt;
+		For calling door programs with the DORINFO1.DEF drop file
+		on a multi-line BBS, this command changes the "1" in the
+		filename to a number from 0 to 9.
+
+<A NAME="chap_11_goto">	GOTO
+
+	    goto &lt;menu.mnu or label&gt; [parameter]
+		Goes to &lt;menu.mnu&gt; if it ends in ".MNU", otherwise goes
+		to &lt;label&gt; within the same file.  Labels in a .MNU file
+		look like ":label", but in the `goto` command you leave
+		out the colon.  The ":label" is not found, it looks for
+		":default".  If the target is a .MNU file and has a
+		"[do]" block, that is executed, then if the "[do]" block
+		does not send it somewhere else, the "[menu]" block
+		defines the current menu.  If [parameter] is specified,
+		%1% is set.
+
+	    gotoh &lt;menu.mnu or label&gt; [parameter]
+		Does a `goto` and then does `help`.
+
+	    gotomsg &lt;menu.mnu&gt; [sub-board_number]
+		This is a special `goto` command for going to the main
+		message base or a sub-board.  It sets up the room number
+		and other information.  For [sub-board_number], give 0
+		for the main message base or a number to go directly to a
+		sub-board, or leave it blank to get the list of sub-board
+		ads and be prompted for a sub-board number.
+
+	    gotoprev
+		Does a `goto` to the previous menu.  The sysop menu uses
+		this to return to where-ever the sysop menu command was
+		pressed.  `gotoprev` is handy for the quit command in any
+		menu.  Since you don't have to specify what the previous
+		menu is, it will be flexible if there are changes later.
+
+	    gotoifaccess &lt;access_options&gt; &lt;menu.mnu or label&gt; [text]
+		Does a `goto` to &lt;menu.mnu&gt; or to &lt;label&gt; if the user has
+		any of the &lt;access_options&gt;, or prints [text], if it is
+		given, if the user does not have any of the access
+		options.  For example:
+
+		     gotoifaccess ABC DOOR.MNU Sorry%comma% not allowed
+
+		If the user has access option A, B, or C, it will go to
+		the door menu, otherwise it will print the "Sorry, not
+		allowed" message.
+
+
+
+                                      - 43 -
+
+
+
+
+	    gotoifnotaccess &lt;access_options&gt; &lt;menu.mnu or label&gt; [text]
+		Opposite of `gotoifaccess`.
+
+	    if &lt;arg1&gt; &lt;operator&gt; &lt;arg2&gt; goto &lt;menu.mnu or label&gt;
+	    if &lt;arg1&gt; &lt;operator&gt; &lt;arg2&gt; then &lt;command&gt;
+		Conditional `goto` or conditional command.  Important:
+		There must be spaces between &lt;operator&gt; and &lt;arg1&gt; and
+		&lt;arg2&gt;.  &lt;operator&gt; can be "==", "&lt;", "&gt;", or "@".  The
+		"&lt;" and "&gt;" can only be used on numbers, but the "==" can
+		be used for either text or numbers.  The "@" is a special
+		pattern match operator which matches a match string with
+		*'s and ?'s on the left with a string on the right.  The
+		`if` command is generally used with %replacement%
+		keywords, like in the commented out line in FIRST.MNU
+		that you can enable to disallow 300 baud callers:
+
+		     if %baud% == 300 GOTO NO300.MNU
+
+		You can also use the "IF-THEN" version of this command to
+		conditionally execute any command.  For example, if you
+		have a menu where you want the help screen to display
+		even if the user has expert mode turned on, you can put
+		this in the [do] block:
+
+		    if %expert% then help
+
+	    ifnot &lt;arg1&gt; &lt;operator&gt; &lt;arg2&gt; goto &lt;menu.mnu or label&gt;
+	    ifnot &lt;arg1&gt; &lt;operator&gt; &lt;arg2&gt; then &lt;menu.mnu or label&gt;
+		Similar to `if`, but performs the `goto` or `then` when
+		the condition is not true.
+
+	    gotoifchargecredits &lt;credits&gt; &lt;menu.mnu&gt;
+		Checks that the user has enough credits, and tells how
+		much it'll cost and confirms that the user wants to spend
+		the credits.  If they do, it'll go to &lt;menu.mnu&gt; and
+		subtract the amount from their account.
+
+<A NAME="chap_11_logoff">	LOGOFF
+
+	    fastlogoff
+		Hangs up without confirming logoff, updating newscan
+		pointers, or printing LOGOFF.TXT.  There is no
+		opportunity for the user to cancel the logoff.  See
+		LOGOFF.MNU for an example of using this function.
+
+<A NAME="chap_11_mail">	MAIL
+
+	    checkmail
+		Read mail.  By default, this command is used in
+		FIRST.MNU, and is also available by the /rereadmail
+		command.
+
+
+
+
+
+                                      - 44 -
+
+
+
+
+	    sendmail [user]
+		Send e-mail.  [user] can be a name, number, or keyword to
+		search for.  If [user] is omitted, the user is prompted
+		for the recipient.
+
+	    feedback
+		Similar to `sendmail` except that account 1 is
+		automatically the recipient.  If CarbonCopyFeedbackTo in
+		BBS.INI is set to a user number, a copy of the feedback
+		will be sent to that user.  This is useful if there is a
+		co-sysop.
+
+<A NAME="chap_11_message_base">	MESSAGE BASE
+
+	    post
+		Post a message.  If PayCreditsForPosting in BBS.INI has
+		not been set to 0, the user gets 25 credits per line for
+		his post, unless the message is anonymous.  For reasons
+		not explained here, the message will be anonymous if the
+		key used to invoke the command is [Y].
+
+	    readmsg [number]
+		Start reading at specified message number.
+
+	    newscan
+		Read new messages in this room if any.
+
+	    gotonew
+		Go to the next room that has new messages.  Citadel users
+		will find this command familiar.
+
+	    ungotonew
+		Go backwards to the previous room with new messages.
+
+	    <A NAME="44_zipscan">global
+		Also known as "zipscan".  Goes to every room with new
+		messages and does a `newscan`.
+
+	    setnewscan
+		Set newscan pointer by telling how many messages should
+		be new.
+
+	    roomdown
+		Go down one room.
+
+	    roomup
+		Go up one room.
+
+	    roomjump [number]
+		Go directly to a room number.  Sysops can use this
+		command to get to any room, regardless of the access
+		level.
+
+
+
+
+                                      - 45 -
+
+
+
+
+	    knownrooms
+		Lists rooms that the user has access to, and notes which
+		ones have access level above 1 or have a subop.  Vertical
+		spacing is inserted between 9 and 10, 19 and 20, and 29
+		and 30 to make it easier to read.
+
+	    delmsgbyuser [number]
+		Allows a user to delete his own messages.
+
+<A NAME="chap_11_miscellaneous">	MISCELLANEOUS
+
+	    chat
+		Chat call.  Produces a short, low pitch tone.  If
+		ChatCommand in BBS.INI is set to a DOS command, the DOS
+		command will be executed instead.  Neither action is
+		taken if SCROLL LOCK is turned on.  Instead, the user is
+		told that the sysop is unavailable.
+
+	    chatloud
+		A variation of the `chat` command, but louder.  The use
+		of ChatCommand and SCROLL LOCK are the same as for
+		`chat`.
+
+	    version
+		Display version and copyright notice.
+
+	    rem [ignored]
+		No action.
+
+	    cls
+		Clear screen.
+
+	    jetbbs
+		The Self-Download feature.
+
+	    dochat
+		Chat mode.  To exit, press [@].  By default, the key for
+		this command is [@] and is global.
+
+	    calldos &lt;command_line&gt;
+		Executes a DOS command.  This command requires more
+		memory than usual, typically about 60k more plus any
+		additional memory used by whatever is executed.  Remember
+		that whatever is printed on the screen while executing
+		another program through this command is not sent through
+		the modem unless the program is specifically designed to
+		do so.  What's worse, if the program asks a question and
+		waits for a key to be pressed, it will go to the local
+		keyboard and there will be no way for a remote user to
+		make it continue until someone presses the key locally.
+		See also `sysopcalldos`.
+
+
+
+
+
+                                      - 46 -
+
+
+
+
+	    callexe &lt;command_line&gt;
+		Similar to `calldos`, but does not use COMMAND.COM, so it
+		cannot call batch files, but it is a slightly faster and
+		uses less memory than `calldos`.
+
+	    editfile &lt;filename&gt; [headernumber]
+		Uses the message editor to write the specified file.
+		&lt;filename&gt; must be set in the MNU file; it is not
+		intended for users to specify a file to write.  See the
+		`sysopeditfile` command if you want to read in, edit, and
+		save a file that is specified at the time the command is
+		used.
+		    The [headernumber] codes are:
+
+		     0 = No header
+		     1 = Message
+		     2 = E-mail
+		     3 = Check
+		     4 = Letterbomb
+		     5 = Anonymous
+		     6 = Touch
+
+	    setprompt &lt;text&gt;
+		Sets the command prompt.  A ": " is added to the end, so
+		leave the colon off in &lt;text&gt;.  You can use %var%
+		replacement keywords in the prompt.  `setprompt` should
+		be used in the "[do]" block of MNU files.  An example for
+		SUB.MNU:
+
+		     [do]
+		     setprompt %sub%/%room%-%roomname%
+		     [menu]
+		     ...
+
+	    setpromptquote &lt;text&gt;
+		Similar to `setprompt` but doesn't add ": ", and requires
+		quotes around &lt;text&gt; so the spaces before and after can
+		be exactly as you entered them.
+
+	    input &lt;character_limit&gt; [print]
+		Inputs up to &lt;character_limit&gt; characters and sets
+		%inputret% with what was typed.  If &lt;character_limit&gt; is
+		1, it will return after a single keystroke, without
+		waiting for enter to be pressed.
+
+	    inputnoecho &lt;character_limit&gt; &lt;time_limit_seconds&gt;
+		Inputs up to &lt;character_limit&gt; characters at half duplex
+		and sets %inputret% with what was typed.  If
+		&lt;character_limit&gt; is 1, it will return after a single
+		character, without waiting for enter.  If
+		&lt;time_limit_seconds&gt; is 0, there is no time limit.  This
+		function is intended for reading from the modem in
+		command mode.
+
+
+
+                                      - 47 -
+
+
+
+
+	    <A NAME="47_yesno">yesno [print]
+		Inputs a "y" or "n" and sets %yesnoret% to YES or NO.
+
+	    appendfile &lt;filename&gt; &lt;print&gt;
+		Adds a line to the end of a file.  You can use this to
+		make your own log files.  Example:
+
+		     appendfile doors.log User %name% entering door menu.
+
+	    waitseconds &lt;seconds&gt;
+		Do nothing for &lt;seconds&gt; seconds.
+
+	    let &lt;var&gt; = &lt;value&gt;
+		Sets %var% to &lt;value&gt;.  Do NOT include the %'s around
+		&lt;var&gt; in the `let` command.  &lt;var&gt; can be a pre-defined
+		variable, for example %level%, or a name that you choose.
+		An example of a `let` command:
+
+		     let level = 3
+
+	    eval &lt;var&gt; = &lt;mathematical expression&gt;
+		`eval` evaluates the expression and then assigns it to
+		&lt;var&gt;, like `let` does.  Valid operators are +, -, *, /,
+		%, (, ).  Some examples:
+
+			eval level = %level% + 1
+			eval onetosix = %rand% % 6 + 1
+
+		The numbers are integers in the range of +/- 2.14
+		billion.  Divide operations round down immediately, so
+		for example:
+
+			eval x = 2 / 3 * 100
+
+		would set x to 0, since 2 / 3 rounded down = 0.  To get
+		the desired result of 6 do the division last:
+
+			eval x = 100 * 2 / 3
+
+	    qwkexportqwkfile &lt;pathname&gt;
+		Creates a QWK file named &lt;pathname&gt;.  If &lt;pathname&gt; is
+		just a filename, it will be placed in the BBS directory,
+		or you can give a full pathname.  Example,
+		C:\BBS\JET.QWK.
+
+	    qwkimportrepfile &lt;pathname&gt;
+		Takes a REP file and adds its messages and e-mail to the
+		system.  The REP file is not deleted after it is
+		imported.  E-mail can be addressed to an account number
+		or give a full name or partial name to search for, but if
+		the search is ambiguous, the e-mail will be returned to
+		the sender.
+
+<A NAME="chap_11_multi-line">	MULTI-LINE
+
+
+                                      - 48 -
+
+
+
+
+	    who
+		Lists users on-line and the ports they're on.  If
+		RamDriveDir is set, it also tells their location.
+
+	    location &lt;text&gt;
+		Sets the location field shown in the `who` command.  The
+		command has no effect if RamDriveDir (in BBS.INI) is not
+		set.
+
+	    touch [user] [message]
+		Sends a message to a user on-line, which is received the
+		next time he gets to a command prompt, or immediately if
+		he is already sitting at one.  If [message] or both
+		[user] and [message] are omitted, the sender is prompted
+		for the information.  The command is rejected if the
+		recipient is not on-line.
+
+	    broadcast [message]
+		Sends a message to all users on-line except the sender.
+		If [message] is omitted, the user is prompted for it.
+		Although the command line can only take 80 characters,
+		the message prompt will accept up to 4 lines, so larger
+		messages can be sent by letting it prompt.
+
+	    talk [channel]
+		Enters the multi-user chat area.  If [channel] is not
+		specified, general area 0 is the default.
+
+	    setdoordir &lt;directory&gt;
+		See door section.
+
+	    setdoornum &lt;number&gt;
+		See door section.
+
+<A NAME="chap_11_phone_list">	PHONE LIST
+
+	    readphonelist
+		Print the phone list.
+
+	    phonelist
+		Add a new BBS to the end of the phone list.
+
+<A NAME="chap_11_print">	PRINT
+
+	    print [text]
+		Prints a line of text.  If [text] is omitted, a blank
+		line is printed.
+
+	    printtolog [text]
+		Prints like the `print` command but prints to LOG.TXT.
+
+	    pause [text]
+		Prints [text] like the `print` command, then waits for a
+		keypress.  Unlike `print`, nothing is printed if [text]
+		is omitted.
+
+                                      - 49 -
+
+
+
+
+
+	    printfile &lt;filename&gt; [text]
+		Prints a file.  If [text] is given, it is printed before
+		the first line, but only if the file is found.  If the
+		file is not found, nothing is printed.  %printfilere% is
+		set to ABORT, SKIP, FILENOTFOUND, or NORMAL if there was
+		no error.
+
+	    help
+		Prints the .HLP file in TextDir corresponding to the menu
+		name.  If a key is pressed, the printing is aborted and
+		the key is sent through to the menu, so you don't have to
+		wait for the menu to finish before pressing the key
+		command.  The exception is for the [P] key, which pauses.
+		If the user has ANSI turned on and a .ANS file exists
+		with the same name, the .ANS file is displayed instead of
+		the .HLP file.
+
+<A NAME="chap_11_sub-boards">	SUB-BOARDS
+
+	    subknown
+		Lists the rooms accessible at the user's Sub-Board access
+		level, in a slightly different format from the regular
+		knownrooms.
+
+	    postsubad
+		Posts the one-line advertisement that is listed before
+		choosing a Sub-Board.  It only shows up to users who have
+		access.
+
+	    writetitlepage
+		Posts the title page printed as users enter the Sub-
+		Board.  If one exists already, it is read into the editor
+		buffer to be edited.  To start over from scratch, enter
+		".c".
+
+	    subuser [user]
+		Set a user's Sub-Board access level.  Each Sub-Board has
+		its own set of access levels.  All users start out at
+		level 0.  Level 9 gives access to the subop menu, and 99
+		is the highest allowable level.  A negative levels can be
+		used to shut a user out of a public Sub-Board.  Subops
+		can change the level of users below their own access
+		level, but not equal or above, so they can make sub-
+		subops without risking being demoted by them.  The
+		restrictions are waived when a sysop is using the
+		command.
+
+	    listsubusers
+		This lists everyone who has a Sub-Board access level
+		other than 0.
+
+	    subopsetsubop
+		Subop access can be given out on a room by room basis.
+
+
+                                      - 50 -
+
+
+
+<A NAME="chap_11_sysop">	SYSOP
+
+	    sysopcalldos [command_line]
+		This is like `calldos` but designed for the sysop to
+		enter the command line.  The command has
+		RemoteSysopPassword protection and also warns of some of
+		the possible ways that the system could get locked up if
+		the wrong program is executed.
+
+	    sysopshell
+		This starts a simulated DOS command prompt and
+		retransmits any stdout printing to the modem.  This
+		command has RemoteSysopPassword protection and also warns
+		of some of the possible ways that the system could get
+		locked up if the wrong program is executed.  Since this
+		command only retransmits output to stdout, you won't see
+		error messages printed to stderr, or anything written
+		directly to the screen.  Be careful not to run anything
+		that will wait for a keypress, because it would be
+		waiting for a keypress on the BBS computer.
+
+	    sysopviewuser [user]
+		Shows information about a user, including information
+		that is only for sysops to see.
+
+	    sysopedituser [user]
+		Edits a user's account.  To improve access level
+		security, there is a RemoteSysopPassword restriction on
+		creating a level 8 or above account, and on lowering a
+		level 8 or above account.  In other words, you have to
+		have the RemoteSysopPassword to cross the boundary
+		between lv7 and lv8, in either direction.  Passwords are
+		not displayed from remote and cannot be set remotely.
+
+	    sysopsettimeleft
+		Sets the time left for all users or all users of a
+		certain level.  Admittedly, this command is not very
+		useful.  RemoteSysopPassword protected.
+
+	    sysopaddtime [user]
+		Add time to an account.  This is a quicker, easier way to
+		add time than using sysopedituser, doing the addition in
+		your head, and re-entering the total time.  If a user's
+		time left exceeds MinutesPerDay set in BBS.INI, it will
+		not be affected until it falls below MinutesPerDay.
+		MinutesPerDay never pulls it down.  On a pay system, you
+		can give out time to paying users and set MinutesPerDay
+		to the freebie daily time that users get if they haven't
+		paid or if they've run out of paid time.
+
+	    sysopdeleteuser [user]
+		Sets a user's access level to -1 so when he tries to log
+		on he will see the file DELETED.TXT and be logged off.
+		This is the same as using sysopedituser to set level -1.
+		RemoteSysopPassword protected.
+
+                                      - 51 -
+
+
+
+
+
+	    sysopdelmsg [number]
+		Delete a message and copy it into LOG.TXT.  If you want
+		to revoke credits, you have to do it yourself.  Usually
+		the posting credits will still be in "Delayed posting
+		credits" so you can revoke them before the offender has
+		even received them.
+
+	    sysopmovemessage [number] [roomdest]
+		Moves a message to another room or sub-board.  Can be
+		accessed by level 5 users with "/move".  The moved
+		message is reposted as new.
+
+	    sysopreadlog
+		First flushes out any log entries still stored in memory,
+		then prints LOG.TXT.
+
+	    sysopdellog
+		Delete LOG.TXT.
+
+	    sysopreadfile [filename]
+		Views a text file.  RemoteSysopPassword protected.
+
+	    sysopeditfile [filename]
+		Uses the message editor to edit a text file.  If the file
+		already exists, it is read into the editor buffer.  To
+		stop the listing, press space.  If you would rather start
+		from scratch, type ".c" to clear out the old file.
+		Usually, [filename] is not specified in MNU file, so the
+		sysop can specify it at the time the command is used.
+		RemoteSysopPassword protected.
+
+	    sysoppostnews
+		Posts the Board News message and marks it as new.  It
+		will be read to the next 30 callers and then only to
+		users who haven't seen it once.
+
+	    sysopsetroomname
+		Sets a room's name and access level.  Press enter on a
+		blank line if you don't want to change something.
+
+	    sysopsetroomaccess
+		Sets room access options.  If any access options are set,
+		users must have one of the access options as well as the
+		required access level to access the room.
+
+	    sysopsetsubop
+		This sets the subop of an individual room.  The specified
+		user can press & in the room to access the subop menu to
+		name the room, set the access level, and delete messages.
+
+	    sysopopenclosesub
+		Toggles a Sub-Board open or closed.  This is the same as
+		setting the access level of the first room to 0 or 100.
+
+
+                                      - 52 -
+
+
+
+
+	    <A NAME="52_xferarea.mnu">sysopeditxferareamnu
+		Uses a special editor to edit XFERAREA.MNU.
+
+	    sysopeditdoormnu
+		Uses a special editor to edit DOOR.MNU.
+
+<A NAME="chap_11_transfers">	TRANSFERS
+
+	    <A NAME="52_x-fer.mnu">gototrans &lt;download_dir&gt; &lt;upload_dir&gt; &lt;x-fer_section_name&gt;
+		Sets the transfer area and performs a `goto` to the menu
+		X-FER.MNU.  To make a download-only transfer section, set
+		&lt;upload_dir&gt; to NOUPLOADDIR.  For an upload-only transfer
+		section, set &lt;download_dir&gt; to NODOWNLOADDIR.  This
+		command sets the replaceable keywords %dldir%, %uldir%,
+		and %transname%.
+
+	    gotodownload
+		This command lets the user search FILES.TXT for a file to
+		download.  If one is found, it performs a `goto` to
+		DL.MNU.  The filename is stored in %xferfilename%.
+
+	    gotoupload
+		Asks for the filename of the upload and then does a
+		`goto` to UL.MNU.  The filename is stored in
+		%xferfilename%.
+
+	    <A NAME="52_xmodemsend">xmodemsend &lt;filename&gt;
+		Download a file using built-in Xmodem.  This command is
+		used in DL.MNU like this:
+
+		     xmodemsend %xferfilename%
+
+	    <A NAME="52_xmodemreceive">xmodemreceive &lt;filename&gt;
+		Upload a file using built-in Xmodem.  This command is
+		used in UL.MNU like this:
+
+		     xmodemreceive %xferfilename%
+
+	    asciidl [filename]
+		Download a file as ASCII.  The user is prompted for the
+		filename if [filename] is omitted, but usually the
+		filename is given by %xferfilename%.
+
+	    asciiul [filename]
+		Upload a file as ASCII.  The user is prompted for the
+		filename if [filename] is omitted, but usually the
+		filename is given by %xferfilename%.
+
+	    transdl &lt;command_line&gt;
+		Calls an external transfer protocol by using `calldos`.
+
+	    transul &lt;command_line&gt;
+		Calls an external transfer protocol by using `calldos`.
+		If the return code from the transfer indicates success,
+
+
+                                      - 53 -
+
+
+
+
+		it prompts for a file description and adds a line to
+		FILES.TXT.  See also `calldos`.
+
+	    addunlistedfiles
+		This command searches the download directory for files
+		not listed in FILES.TXT.
+
+<A NAME="chap_11_userlog">	USERLOG
+
+	    listusers
+		Lists the entire userlog.  At the end, it prints the
+		richest user that it found, based on how many credits the
+		user had in the bank.  Credit in the mail or in a casino
+		game is not counted, and sysops are not included in the
+		search.
+
+	    callingtimeschart
+		Displays a spiffy looking 3D bar chart of the frequency
+		of calls at each hour of the day.
+
+	    callingtrendweeks
+		Displays a chart of the number of calls over the past
+		several weeks.
+
+	    callingtimesdayofweek
+		Days-of-the-week calling chart.
+
+	    viewcallerlog
+		Lists the last few callers and when they called.  The
+		length of the list is controlled by the length of the
+		file SYS\CALLERS.TXT.  To make the list shorter, delete
+		lines from the file; to make it longer, add lines.
+
+	    viewuser [user]
+		Prints information about another user that is considered
+		OK to give out to non-sysops.  The sysop version of this
+		is `sysopviewuser`.
+
+	    userlogbystring [keyword]
+		Searches the userlog by a text keyword.  The following
+		fields are searched:
+
+		     Name
+		     UserInfo1
+		     UserInfo2
+		     Last call date
+		     Level
+		     Calls
+
+	    userlogbynumber
+		Searches the userlog by one of 6 numeric user info
+		fields, listing all that are greater or less than a
+		certain value.
+
+
+
+                                      - 54 -
+
+
+
+
+	    viewyourself
+		This command was replaced by STATS.MNU, and does about
+		the same thing.
+
+	    zapstats
+		Edit your user information, everything except password.
+
+	    changepassword
+		Change password.
+
+<A NAME="chap_11_voting_poll">	VOTING POLL
+
+	    pollvote
+		Vote.  Voting is allowed once per call.
+
+	    viewpoll
+		View the results of the voting polls.
+
+	    makepoll [number]
+		Make a new voting poll.  Enter the question, then enter
+		up to eight choices.  If you don't need all eight
+		choices, press enter on a blank line to finish.  To
+		delete a poll, press enter on a blank line for the
+		question and for the first choice.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 55 -
+<A NAME="chap_12">
+
+
+
+
+			  Chapter 12 - Software License
+
+	SOFTWARE LICENSE
+
+	You are free to copy and distribute the files of the shareware
+	version of JetBBS so long as they are not modified in any way and
+	they are distributed together.  You may use JetBBS for an
+	evaluation period of 30 days, but after that you must register if
+	you are going to continue to use it.  See the registration form at
+	the end of this document or the file REGISTER.FRM for registration
+	instructions.
+
+	VENDINFO
+
+	The attached VENDINFO data record is hereby incorporated by
+	reference.  Any distribution satisfying all the distribution
+	requirements expressed in that data record is hereby authorized.
+
+	DISCLAIMER
+
+	This software is provided on an "as is" basis without warranty of
+	any kind, expressed or implied, including but not limited to the
+	implied warranties of merchantability and fitness for a particular
+	purpose.  The author will not be liable for any special,
+	incidental, consequential, indirect or similar damages due to loss
+	of data or any other reason, even if the author or an agent of the
+	author has been advised of the possibility of such damages.  In no
+	event shall the author's liability for any damages ever exceed the
+	price paid for the license to use the software, regardless of the
+	form of the claim.  The person using the software bears all risk
+	as to the quality and performance of the software.
+
+	ACKNOWLEDGEMENTS
+
+	This product uses the SPAWNO routines by Ralf Brown to minimize
+	memory use while shelling to DOS and running other programs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      - 56 -
+<A NAME="index">
+
+
+
+
+
+
+
+
+				      Index
+
+	%variable%, 10, 34		   Calltrends, 27
+					   Capture, 29
+	&C1, 20				   CAPTURE.TXT, 29
+	&D2, 20				   CarbonCopyFeedbackTo, 43
+					   Carrier detect, 20
+	Access levels, 25, 28, 49, 51	   Casino, 39
+	Access options, 42, 51		   casinogamesetsellingprice, 39
+	Add time, 50			   CD-ROM, 16
+	addunlistedfiles, 52		   CHAIN.TXT, 11, 40
+	AllowEscChar, 8			   changepassword, 53
+	Anonymous post, 25		   chat, 10, 28, 45
+	AnswerOnRing, 20		   Chat call, 10, 29, 45
+	appendfile, 46			   ChatCommand, 45
+	ASCII, 52			   chatloud, 10, 31, 45
+	asciidl, 52			   checkautomessage, 38
+	asciiul, 52			   checkboardnews, 38
+	Auto-answer, 19, 22		   checkmail, 43
+	AUTOEXEC.BAT, 13		   Checks, 38
+	Auto-message, 26, 38		   cls, 45
+					   Command prompt, 46
+	Bank, 38			   CONFIG.SYS, 13
+	BANK.MNU, 15, 38, 39		   craps, 39
+	BBS list, 26, 48		   crapscredit, 39
+	BBS.INI, 8, 9, 12, 13, 15, 17,	   crapsowner, 39
+	 20, 21, 28, 33, 43, 44, 45,	   CTRL+BREAK, 29
+	 47, 50				   CTRL+C, 29
+	bignum, 39			   Customization, 7
+	bignumcredit, 39
+	bignumowner, 39			   Daily events, 12
+	Board news, 26, 38, 51		   Delete message, 24
+	borderauthors, 38, 40		   DELETED.TXT, 50
+	Borderlines, 26, 40		   delmsgbyuser, 44
+	broadcast, 13, 48		   DESQview, 4
+	Buy time, 38			   Dimension Nine BBS, 5
+	buycasinogame, 39		   DL.MNU, 52
+	buyletterbombkit, 38		   dochat, 45
+	buylevel, 38			   Door drop files, 11, 40
+	buytime, 38			   Door programs, 11
+					   DOOR.MNU, 11, 41, 51
+	Calldays, 27			   DOOR.SYS, 11, 40
+	calldoor, 40			   Doors, 40
+	calldoor2, 41			   DORINFO1.DEF, 11, 40, 42
+	calldoornoswap, 41		   double, 39
+	calldos, 45			   doublecredit, 39
+	Caller log, 27, 53		   doubleowner, 39
+	CALLERS.TXT, 27, 53		   Drop files, 11, 40
+	callexe, 45			   DTR, 20
+	CALLINFO.BBS, 11, 40
+	callingtimeschart, 53		   Edit user, 28
+	callingtimesdayofweek, 53	   editfile, 45
+	callingtrendweeks, 53		   E-mail, 25, 43
+	Calltimes, 27			   Escape character, 8
+
+                                      - 57 -
+
+
+
+
+	eval, 47			   LOG.TXT, 50
+	EVENT.BAT, 12			   Logoff, 43
+	Events, 12			   LOGOFF.TXT, 7
+					   Logon messages, 26
+	fastlogoff, 43			   LOGON.TXT, 7
+	Features, 4
+	feedback, 43			   Mail, 43
+	File transfers, 26		   MAIN.MNU, 9, 10, 30
+	FILES.TXT, 52			   makepoll, 54
+	FIRST.MNU, 10, 33, 36, 43	   Message base, 23, 44
+	Forced logoff, 28		   Message base scrolling, 27
+	Function keys, 28		   Message editor, 24, 45, 51
+					   Microsoft Windows, 4, 13, 14
+	Gameop, 39			   MidnightEvent, 12
+	global, 24, 44			   MinutesPerDay, 15, 50
+	GLOBAL.MNU, 30			   Miscellaneous, 44
+	goto, 31, 42			   MNU, 9, 10, 30, 31
+	Goto new messages, 24		   MNU files, [do] block, 33
+	gotodownload, 52		   MNU files, [menu] block, 30
+	gotoh, 42			   ModemInitStrings, 20
+	gotoifaccess, 42		   Modems, 19, 20, 21, 22
+	gotoifchargecredits, 39, 43	   MSG.MNU, 10, 25
+	gotoifnotaccess, 43		   MSGFIX utility, 17, 18
+	gotomsg, 42			   MSGLIST.DAT, 18
+	gotonew, 44			   Multi-line, 12, 13, 14, 41, 47
+	gotoprev, 42			   Multitasking, 14
+	gototrans, 51
+	gotoupload, 52			   Newscan, 23, 44
+	greed, 39			   Newscan pointers, 24, 44
+	greedcredit, 39			   NEWUSER.TXT, 7
+	greedowner, 39			   NO300.MNU, 43
+
+	Hayes compatible, 19		   Options, 42
+	help, 48			   OS/2, 4
+
+	if, 43				   Password, 27, 28
+	ifnot, 43			   pause, 48
+	IMPORT utility, 17		   Pause between messages, 23
+	input, 46			   Pay system, 15
+	inputnoecho, 46			   PayCreditsForPosting, 16, 44
+	Installation, 6			   Phone list, 26, 48
+					   phonelist, 48
+	jetbbs, 45			   PIF, 15
+	JETBBS.DAT, 6			   pollvote, 53
+	JETBBS.PIF, 4, 14		   post, 44
+	JETLOCAL.PIF, 15		   postautomessage, 38
+	JETSETUP.EXE, 6			   postborder, 40
+					   postborderanon, 40
+	knownrooms, 44			   postsubad, 49
+					   Preload, 33
+	let, 46				   Print, 48
+	Letterbomb, 38			   printfile, 48
+	listsubusers, 49		   printtolog, 48
+	listusers, 52
+	location, 47			   qwkexportqwkfile, 47
+	Lock file, 14			   qwkimportrepfile, 47
+        LOCK#.TXT, 14
+
+
+
+
+	RAMDRIVE, 13			   sysopeditxferareamnu, 51
+	RamDriveDir, 13, 47		   sysopmovemessage, 50
+	Read messages, 23		   sysopopenclosesub, 51
+	readborders, 40			   sysoppostnews, 51
+	readmsg, 44			   sysopreadfile, 51
+	readphonelist, 48		   sysopreadlog, 51
+	RefundPostingTime, 15		   sysopsetroomaccess, 51
+	rem, 45				   sysopsetroomname, 51
+	RemoteSysopPassword, 9, 49,	   sysopsetsubop, 51
+	 50, 51				   sysopsettimeleft, 50
+	Replacement keywords, 34	   sysopshell, 49
+	roomdown, 44			   sysopviewuser, 50
+	roomjump, 44			   System requirements, 4
+	Rooms, 23, 24
+	roomup, 44			   talk, 14, 48
+	roulette, 39			   Temporary sysop, 28
+	roulettecredit, 39		   TextDir, 48
+	rouletteowner, 39		   touch, 13, 47
+					   transdl, 52
+	S0=, 20				   Transfers, 26, 51
+	SCROLLDN.COM, 41		   transul, 52
+	Scrolling, 27
+	See border authors, 26		   UL.MNU, 52
+	selltime, 39			   Ungoto new messages, 24
+	sendcheck, 38			   ungotonew, 44
+	sendletterbomb, 38		   User info, 27
+	sendmail, 43			   UserInfo1, 53
+	Set newscan pointers, 24, 44	   UserInfo2, 53
+	setdoordir, 41, 48		   Userlog, 27, 52
+	setdoornum, 42, 48		   Userlog scrolling, 27
+	setnewscan, 44			   userlogbynumber, 53
+	setprompt, 46			   userlogbystring, 53
+	setpromptquote, 46
+	SHARE, 13			   version, 45
+	six, 39				   viewcallerlog, 53
+	sixcredit, 39			   viewpoll, 54
+	sixowner, 39			   viewuser, 53
+	slot, 39			   viewyourself, 53
+	slotcredit, 39			   virushunter, 39
+	slotowner, 39			   virushuntercredit, 39
+	STATS.MNU, 10, 27, 53		   virushunterowner, 39
+	Status bar, 28			   Voting polls, 53
+	SUB.MNU, 46
+	Sub-boards, 25, 49		   waitseconds, 46
+	subknown, 49			   who, 13, 47
+	subopsetsubop, 49		   Windows, 4, 13, 14
+	subuser, 49			   Wish list, 56
+	SYS\CALLERS.TXT, 53		   writetitlepage, 49
+	Sysop, 49
+	sysopaddtime, 50		   X-FER.MNU, <A HREF="#52_x-fer.mnu">52</A>
+	sysopcalldos, 49		   XFERAREA.MNU, <A HREF="#52_xferarea.mnu">52</A>
+	sysopdeleteuser, 50		   Xmodem, <A HREF="#52_xmodemsend">52</A>
+	sysopdellog, 51			   xmodemreceive, <A HREF="#52_xmodemreceive">52</A>
+	sysopdelmsg, 50			   xmodemsend, <A HREF="#52_xmodemsend">52</A>
+	sysopeditdoormnu, 51
+	sysopeditfile, 51		   yesno, <A HREF="#47_yesno">47</A>
+	sysopedituser, 50		   Your user stats, <A HREF="#27_user_stats">27</A>
+
+                                           Zipscan, <A HREF="#24_zipscan">24,</A> <A HREF="#44_zipscan">44</A></pre></html>
